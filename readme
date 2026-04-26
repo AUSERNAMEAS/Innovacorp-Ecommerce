@@ -9,6 +9,8 @@ MAIN PAGE
 4. basic security----------
 5. pageUser add functionality button verDetalles
 6. add the customRequest to pageUser --------------------
+16. aff a filter to see the products
+
 
 ADMIN PANEL
 
@@ -18,8 +20,10 @@ ADMIN PANEL
 9. implement stock limitation in the main page ------------- fix 2 sizes fixed
 10. add path url when u add a new product-----------------
 11. add verification and security to the panel
-12. add a method to modify and existing product
+12. add a method to modify and existing product----------
 13. in "ver detalles" also add the shipping adress
+14. fix that u can actually see the shirt size in ver detalles
+15. add see more product with filters.
 
 
 things that i learned/shouldve known

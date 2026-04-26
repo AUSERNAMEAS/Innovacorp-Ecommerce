@@ -37,40 +37,10 @@
 
             <div class="form-section">
                 <h2>Forma de Pago</h2>
-                <div class="payment-options">
-                    <label>
-                        <input type="radio" name="payment-method" value="card" id="card-option" checked> Tarjeta de Crédito / Débito 💳
-                    </label>
-                    <label>
-                        <input type="radio" name="payment-method" value="paypal" id="paypal-option"> PayPal
-                    </label>
-                    <label>
-                        <input type="radio" name="payment-method" value="oxxo" id="oxxo-option"> Depósito en OXXO
-                    </label>
-                </div>
+                <div id="paypal-button-container" style="display:none;"></div>
 
-                <div id="card-details">
-                    <div class="form-group">
-                        <label for="card-name">Nombre del titular</label>
-                        <input type="text" id="card-name">
-                    </div>
-                    <div class="form-group">
-                        <label for="card-number">Número de tarjeta</label>
-                        <input type="text" id="card-number" pattern="\d{16}" placeholder="xxxx-xxxx-xxxx-xxxx">
-                    </div>
-                    <div class="form-group">
-                        <label for="card-exp">MM/AA</label>
-                        <input type="text" id="card-exp" pattern="\d{2}/\d{2}" placeholder="MM/AA">
-                    </div>
-                    <div class="form-group">
-                        <label for="card-cvv">CVV</label>
-                        <input type="text" id="card-cvv" pattern="\d{3,4}" placeholder="CVV">
-                    </div>
-                </div>
+                
             </div>
-            <div id="paypal-button-container" style="display:none;"></div>
-            
-            <button id="pay-btn" type="button">Realizar Pago</button>
         </form>
     </div>
 
