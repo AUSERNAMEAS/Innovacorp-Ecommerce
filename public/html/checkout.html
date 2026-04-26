@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra - Fake Shop</title>
+    <link rel="stylesheet" href="../css/checkout.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Datos de Envío y Pago</h1>
+        <form id="checkout-form">
+            <div class="form-section">
+                <h2>Datos de Envío</h2>
+                <div class="form-group">
+                    <label for="name">Nombre(s)</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Apellido(s)</label>
+                    <input type="text" id="lastname" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Dirección</label>
+                    <input type="text" id="address" placeholder="Calle, número, colonia" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">Ciudad</label>
+                    <input type="text" id="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Teléfono</label>
+                    <input type="tel" id="phone" required>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Forma de Pago</h2>
+                <div class="payment-options">
+                    <label>
+                        <input type="radio" name="payment-method" value="card" id="card-option" checked> Tarjeta de Crédito / Débito 💳
+                    </label>
+                    <label>
+                        <input type="radio" name="payment-method" value="paypal" id="paypal-option"> PayPal
+                    </label>
+                    <label>
+                        <input type="radio" name="payment-method" value="oxxo" id="oxxo-option"> Depósito en OXXO
+                    </label>
+                </div>
+
+                <div id="card-details">
+                    <div class="form-group">
+                        <label for="card-name">Nombre del titular</label>
+                        <input type="text" id="card-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="card-number">Número de tarjeta</label>
+                        <input type="text" id="card-number" pattern="\d{16}" placeholder="xxxx-xxxx-xxxx-xxxx">
+                    </div>
+                    <div class="form-group">
+                        <label for="card-exp">MM/AA</label>
+                        <input type="text" id="card-exp" pattern="\d{2}/\d{2}" placeholder="MM/AA">
+                    </div>
+                    <div class="form-group">
+                        <label for="card-cvv">CVV</label>
+                        <input type="text" id="card-cvv" pattern="\d{3,4}" placeholder="CVV">
+                    </div>
+                </div>
+            </div>
+            <div id="paypal-button-container" style="display:none;"></div>
+            
+            <button id="pay-btn" type="button">Realizar Pago</button>
+        </form>
+    </div>
+
+    <script src="../javascript/checkout.js"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AWW4y9AZqu23FG8wnl7UQH7UjO2dRbixd29TsM3Xr3Y_68qu6t1Y73mG0ZvXjEPmGE75OVTnNkm8QGGt&currency=MXN"></script>
+
+</body>
+</html>

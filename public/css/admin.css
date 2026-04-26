@@ -1,0 +1,578 @@
+/* Estilos específicos para el Panel de Administración */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background-color: #f8f8ff; /* Blanco azulado, similar al product-card */
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid #8a2be2; /* Morado de la navegación */
+}
+
+.card h2 {
+    color: #6a0dad; /* Morado oscuro del h2 */
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.card .big-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ff69b4; /* Rosa del botón de personalización */
+    margin: 0.2rem 0 0.5rem 0;
+}
+
+.card.full-width {
+    grid-column: 1 / -1; /* Ocupa todo el ancho en el grid */
+    border-left: 5px solid #5bc0de; /* Azul claro del botón de cargar más */
+}
+
+/* Estilos de tabla para Pedidos */
+.table-responsive {
+    overflow-x: auto;
+}
+
+#orders table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background-color: white;
+}
+
+#orders th, #orders td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#orders th {
+    background-color: #8a2be2; /* Morado */
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+#orders tbody tr:hover {
+    background-color: #f0f0f5;
+}
+
+#orders a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.status.pending {
+    background-color: #ffc107; /* Amarillo */
+    color: #333;
+}
+
+.status.sent {
+    background-color: #5bc0de; /* Azul claro */
+    color: white;
+}
+
+.status.completed {
+    background-color: #28a745; /* Verde */
+    color: white;
+}
+
+/* Estilos para Solicitudes de Personalización */
+#custom-requests ul {
+    list-style: none;
+    padding: 0;
+}
+#custom-requests li {
+    padding: 10px;
+    border-bottom: 1px dashed #ddd;
+    margin-bottom: 10px;
+}
+#custom-requests li:last-child {
+    border-bottom: none;
+}
+
+/* --- Nuevos estilos para Gestión de Productos (#products-manage) --- */
+
+#product-stock-table .stock-value {
+    font-weight: bold;
+    color: #007bff; /* Azul */
+}
+
+.stock-btn {
+    background-color: #8a2be2; /* Morado base */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin: 0 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 30px; 
+    height: 30px;
+    line-height: 1;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.stock-btn:hover {
+    background-color: #6a0dad;
+}
+
+.stock-btn.decrease-stock {
+    background-color: #dc3545; /* Rojo para disminuir */
+}
+
+.stock-btn.decrease-stock:hover {
+    background-color: #c82333;
+}
+
+.stock-btn.increase-stock {
+    background-color: #28a745; /* Verde para aumentar */
+}
+
+.stock-btn.increase-stock:hover {
+    background-color: #1e7e34;
+}
+
+/* Estilos para el formulario de Agregar Nuevo Producto */
+.product-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f8f8ff;
+    margin-top: 1rem;
+}
+
+.product-form-grid .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-form-grid .form-group.full-row {
+    grid-column: 1 / -1; /* Ocupa todo el ancho */
+}
+
+.product-form-grid input[type="text"],
+.product-form-grid input[type="number"],
+.product-form-grid textarea {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+}
+
+#btn-add-product {
+    background-color: #ff69b4; /* Rosa del custom form */
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.2s;
+}
+
+#btn-add-product:hover {
+    background-color: #ffb6c1;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: white;
+  margin: 5% auto;
+  padding: 20px;
+  width: 50%;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.close {
+  float: right;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* TABLA DE STOCK */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:1rem;
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+font-size:0.95rem;
+}
+
+/* encabezado */
+
+thead{
+background:#8a2be2;
+color:white;
+}
+
+thead th{
+padding:0.8rem;
+text-align:center;
+font-weight:bold;
+}
+
+/* celdas */
+
+tbody td{
+padding:0.7rem;
+text-align:center;
+border-bottom:1px solid #eee;
+}
+
+/* filas alternadas */
+
+tbody tr:nth-child(even){
+background:#f7f4ff;
+}
+
+/* hover */
+
+tbody tr:hover{
+background:#e9ddff;
+transition:0.2s;
+}
+
+/* columna stock */
+
+.stock-value{
+font-weight:bold;
+color:#6a0dad;
+}
+
+/* BOTONES */
+
+.stock-btn{
+background:#8a2be2;
+color:white;
+border:none;
+padding:0.3rem 0.7rem;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+margin:0 3px;
+transition:0.2s;
+}
+
+.stock-btn:hover{
+background:#a050f0;
+}
+
+/* botón disminuir */
+
+.decrease-stock{
+background:#d9534f;
+}
+
+.decrease-stock:hover{
+background:#c9302c;
+}
+
+/* botón aumentar */
+
+.increase-stock{
+background:#5cb85c;
+}
+
+.increase-stock:hover{
+background:#4cae4c;
+}
+
+.save-stock-btn{
+background:#28a745;
+color:white;
+border:none;
+padding:0.6rem 1.2rem;
+border-radius:8px;
+font-size:0.95rem;
+font-weight:bold;
+cursor:pointer;
+transition:all 0.2s ease;
+box-shadow:0 3px 6px rgba(0,0,0,0.15);
+}
+
+/* hover */
+
+.save-stock-btn:hover{
+background:#218838;
+transform:translateY(-1px);
+box-shadow:0 5px 10px rgba(0,0,0,0.2);
+}
+
+/* click */
+
+.save-stock-btn:active{
+transform:translateY(0);
+box-shadow:0 2px 4px rgba(0,0,0,0.15);
+}
+
+/* botón para ver */
+
+.view-custom-btn{
+background:#0d6efd;
+color:white;
+border:none;
+padding:0.5rem 1rem;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+transition:0.2s;
+}
+
+.view-custom-btn:hover{
+background:#0b5ed7;
+}
+
+/* botón para aprobar */
+
+.approve-btn{
+background:#28a745;
+color:white;
+border:none;
+padding:0.5rem 1rem;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+transition:0.2s;
+}
+
+.approve-btn:hover{
+background:#218838;
+}
+
+/* cuando ya está aprobado */
+
+.view-custom-btn.approved{
+background:#28a745;
+}
+
+.view-custom-btn.approved:hover{
+background:#218838;
+}
+.order-status-select{
+background:#f9f9ff;
+border:1px solid #d0d0f0;
+border-radius:6px;
+padding:0.4rem 0.7rem;
+font-weight:bold;
+color:#333;
+}
+
+/* hover */
+
+.order-status-select:hover{
+border-color:#8a2be2;
+}
+
+/* cuando está enfocado */
+
+.order-status-select:focus{
+outline:none;
+border-color:#8a2be2;
+box-shadow:0 0 4px rgba(138,43,226,0.4);
+}
+.view-order-btn{
+background:#0d6efd;
+color:white;
+border:none;
+padding:0.35rem 0.8rem;
+font-size:0.85rem;
+border-radius:5px;
+cursor:pointer;
+font-weight:500;
+transition:background 0.2s ease, transform 0.1s ease;
+}
+
+.view-order-btn:hover{
+background:#0b5ed7;
+}
+
+.view-order-btn:active{
+transform:scale(0.96);
+}
+
+.btn-product-action{
+background:#28a745;
+color:white;
+border:none;
+padding:0.6rem 1.2rem;
+border-radius:6px;
+cursor:pointer;
+font-weight:500;
+font-size:0.9rem;
+margin-top:1rem;
+transition:background 0.2s ease, transform 0.1s ease;
+}
+
+.btn-product-action:hover{
+background:#218838;
+}
+
+.btn-product-action:active{
+transform:scale(0.97);
+}
+
+#new-category{
+width:100%;
+padding:0.45rem 0.6rem;
+border:1px solid #ccc;
+border-radius:6px;
+font-size:0.9rem;
+background:white;
+cursor:pointer;
+transition:all 0.2s ease;
+}
+
+/* hover */
+
+#new-category:hover{
+border-color:#8a2be2;
+}
+
+/* focus */
+
+#new-category:focus{
+outline:none;
+border-color:#8a2be2;
+box-shadow:0 0 4px rgba(138,43,226,0.35);
+}
+
+/* opción deshabilitada */
+
+#new-category option:disabled{
+color:#888;
+}
+
+/* public/css/admin.css */
+
+.btn-delete {
+    background-color: #ff4d4d; /* Rojo vibrante */
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 50%; /* Lo hace circular */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    margin-left: 5px;
+}
+
+.btn-delete:hover {
+    background-color: #cc0000; /* Rojo más oscuro al pasar el mouse */
+    transform: scale(1.1);
+}
+
+.btn-delete i {
+    font-size: 16px;
+}
+
+/* public/css/admin.css */
+
+/* 1. Ocultar todas las secciones por defecto */
+section {
+    display: none !important; /* Forzamos el ocultado */
+    opacity: 0;
+}
+
+/* 2. Mostrar SOLO la sección que tenga la clase .active */
+section.active {
+    display: block !important;
+    opacity: 1;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 3. Estilo para el enlace seleccionado en el menú */
+nav a.active-link {
+    background-color: #9370db !important;
+    border-bottom: 3px solid white;
+}
+
+.actions-cell {
+    display: flex;
+    gap: 10px; /* Espacio entre el lápiz y la basura */
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-delete-icon {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #ff4d4d; /* Rojo */
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-delete-icon:hover {
+    transform: scale(1.2);
+    color: #cc0000;
+}
+
+/* Bloquea todo en la fila inactiva */
+.inactive-product {
+    background-color: #f2f2f2 !important;
+    color: #888 !important;
+    pointer-events: none; /* Bloquea la fila */
+}
+
+/* EXCEPCIÓN: Permitir clics SOLO en los botones de acción y el modal */
+.inactive-product .btn-delete-icon, 
+.inactive-product .btn-edit-icon {
+    pointer-events: auto !important; /* Esto rompe el bloqueo para estos botones */
+    cursor: pointer !important;
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+/* Mantener bloqueados los botones de stock */
+.inactive-product .stock-btn {
+    pointer-events: none; 
+    opacity: 0.4;
+}

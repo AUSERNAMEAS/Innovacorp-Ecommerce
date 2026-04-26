@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Shop - Productos Personalizados</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <!-- dependiendo ,si tiene sesion muestra el nombre y en la esquina cerrar seesion,si no no cambia nada -->
+
+    <header>
+    <img src="/img/logo/logo.jpg" alt="Logo Fake Shop" style="height:48px;vertical-align:middle;">
+    <div class="userSession" style="margin-left:20px;"></div>
+   </header>
+
+
+    <nav>
+        <a href="#about">Inicio</a>
+        <a href="#products">Productos Ya Hechos</a>
+        <a href="#custom">Personaliza el Tuyo</a>
+        <a href="#cart">Carrito de Compras</a>
+    </nav>
+
+    <div class="container">
+
+        <section id="about">
+            <h2>Acerca de Nosotros</h2>
+            <p>En <strong>Fake Shop</strong>, transformamos tus ideas en productos únicos. Nos especializamos en la creación de artículos personalizados como **tazas, termos, sudaderas y camisas**, utilizando materiales de alta calidad y diseños vibrantes. Desde un regalo especial hasta un pedido para tu evento, ¡hacemos que cada pieza sea tan única como tú!</p>
+        </section>
+
+        <section id="products">
+            <h2>Productos Ya Hechos</h2>
+            <p>Explora nuestra colección de diseños pre-diseñados. ¡Listos para ser tuyos!</p>
+            <div id="product-grid" class="product-grid">
+                </div>
+            <button id="load-more-btn">Ver más productos</button>
+        </section>
+
+        <section id="custom">
+    <h2>Personaliza tu Producto</h2>
+    <p>¡Sube tu imagen y acomódala sobre la prenda para ver cómo queda!</p>
+    
+    <div style="display: flex; gap: 30px; flex-wrap: wrap; align-items: flex-start;">
+        <form class="custom-form" style="flex: 1; min-width: 300px;">
+            <label for="product-type">Tipo de Producto:</label>
+            <input type="text" id="product-type" placeholder="Ej. Taza, Playera" required>
+
+            <label for="custom-image">1. Selecciona tu Imagen:</label>
+            <input type="file" id="custom-image" accept="image/*" required>
+
+            <label for="instructions">2. Instrucciones Adicionales:</label>
+            <textarea id="instructions" rows="4" placeholder="Dinos más detalles..."></textarea>
+
+            <button type="button" id="btn-personalized">Enviar Solicitud</button>
+        </form>
+
+        <div id="preview-container" style="position: relative; width: 350px; height: 400px; background-color: #fff; border-radius: 8px; border: 1px solid #ddd; overflow: hidden;">
+            <p style="text-align: center; font-size: 0.8rem; color: #888; margin-top: 10px;">Vista Previa de Diseño</p>
+            <img src="../img/logo/playeraBlanca.png" alt="Playera Blanca" style="width: 100%; height: auto; pointer-events: none;">
+            
+            <div id="drop-zone" style="position: absolute; top: 100px; left: 100px; width: 150px; height: 200px; border: 1px dashed #bbb; z-index: 5;">
+                <p style="font-size: 0.6rem; color: #ccc; text-align: center; margin-top: 40%;">Suelta aquí tu diseño</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <section id="cart">
+            <h2>Carrito de Compras</h2>
+            <div id="cart-items">
+                <p>Tu carrito está vacío.</p>
+            </div>
+            <div class="cart-details">
+                <p>Subtotal: <span id="cart-subtotal">$0.00 MXN</span></p>
+                <p>Envío: <span id="cart-shipping">$0.00 MXN</span></p>
+                <p><strong>Total: <span id="cart-total">$0.00 MXN</span></strong></p>
+            </div>
+            <button id="checkout-btn">Finalizar Compra</button>
+        </section>
+
+    </div>
+
+    
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-section">
+            <h3>Fake Shop</h3>
+            <p>Tienda en línea de ejemplo.</p>
+            <p>Calidad, estilo y buen precio.</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Contacto</h3>
+            <p>📞 Tel: 81 1234 5678</p>
+            <p>📧 Email: soporte@fakeshop.com</p>
+            <p>📍 Monterrey, México</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Enlaces</h3>
+            <a href="#">Inicio</a>
+            <a href="#">Productos</a>
+            <a href="#">Carrito</a>
+            <a href="#">Soporte</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Fake Shop - Todos los derechos reservados.</p>
+    </div>
+</footer>
+<script src="/javascript/diseno.js"></script>
+</body>
+</html>
+
+

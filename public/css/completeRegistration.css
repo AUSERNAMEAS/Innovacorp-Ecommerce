@@ -1,0 +1,74 @@
+/* Estilos base */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6; /* Gris muy claro para resaltar el formulario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Contenedor del Formulario */
+form {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+}
+
+/* Títulos y textos */
+h2 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+p {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Input de Teléfono */
+input[type="tel"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 2px solid #e1e1e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box; /* Evita que el padding ensanche el input */
+}
+
+input[type="tel"]:focus {
+    border-color: #4285f4; /* Azul Google para indicar enfoque */
+}
+
+/* Botón de Finalizar */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4285f4; /* Color primario de Google */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+button:hover {
+    background-color: #357ae8;
+}
+
+button:active {
+    transform: scale(0.98); /* Efecto de click */
+}

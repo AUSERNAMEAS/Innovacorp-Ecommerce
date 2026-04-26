@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img  class="imagePreview" src="" alt="pls">
+    <script type="module">
+try
+    {
+        const image = await fetch(`/api/custom-request/get-image/1004`)
+        console.log(image);
+        const result = await image.json();
+        const imageContainer = document.querySelector('.imagePreview');
+        imageContainer.src = result.json_disenio;
+    }
+    catch (error)    {
+        console.error('Error fetching custom request image:', error);
+    }</script>
+</body>
+
+</html>

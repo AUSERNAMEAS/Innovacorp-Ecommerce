@@ -1,0 +1,165 @@
+
+        .auth-container { max-width:900px;margin:40px auto;padding:20px;display:flex;gap:24px;flex-wrap:wrap; }
+        .auth-card { flex:1 1 380px;padding:20px;border-radius:8px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08); }
+        .auth-card h2 { margin-top:0; }
+        .form-group { margin-bottom:12px; display:flex;flex-direction:column; }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"] { padding:8px;border:1px solid #ccc;border-radius:4px; }
+        .btn { display:inline-block;padding:10px 16px;border-radius:6px;background:#2b7cff;color:#fff;text-decoration:none;border:none;cursor:pointer; }
+        .muted { color:#666;font-size:0.9rem; }
+        @media(max-width:640px){ .auth-container{padding:12px} }
+
+/* AUTH LAYOUT
+   Centers the login/register card in the middle of the screen
+*/
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 80vh;
+    padding: 40px 20px;
+    background-color: #f9f9f9; /* Light background to make the white card pop */
+}
+
+/* AUTH CARD
+   The white box containing the forms
+*/
+.auth-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    max-width: 400px;
+    width: 100%;
+    animation: fadeIn 0.3s ease-in-out; /* Smooth transition when switching cards */
+}
+
+/* FORM STYLING
+*/
+.auth-card h2 {
+    margin-bottom: 10px;
+    color: #333;
+    text-align: center;
+}
+
+.auth-card .muted {
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #444;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+/* BUTTONS
+*/
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff4d4d; /* Your shop's primary color */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background-color: #e64545;
+}
+
+/* VISUAL SEPARATOR ("o continúa con")
+*/
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #999;
+    font-size: 0.85rem;
+}
+
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #eee;
+}
+
+.separator span {
+    padding: 0 10px;
+}
+
+/* GOOGLE BUTTON
+   Following Google's branding guidelines
+*/
+.btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background-color: #ffffff;
+    color: #3c4043;
+    border: 1px solid #dadce0;
+    padding: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.btn-google:hover {
+    background-color: #f8f9fa;
+    border-color: #d2d4d7;
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+}
+
+.btn-google img {
+    width: 18px;
+    height: 18px;
+}
+
+/* FOOTER TEXT (Switch link)
+*/
+.switch-auth {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.switch-auth a {
+    color: #ff4d4d;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.switch-auth a:hover {
+    text-decoration: underline;
+}
+
+/* Simple animation for switching cards */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

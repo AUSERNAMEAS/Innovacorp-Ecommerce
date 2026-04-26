@@ -1,0 +1,5 @@
+# Secretos y variables de entorno
+.env
+
+# Dependencias de Node (esto evita subir miles de archivos innecesarios)
+node_modules/

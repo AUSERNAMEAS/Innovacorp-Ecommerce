@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Registro</title>
+    <link rel="stylesheet" href="../css/completeRegistration.css">
+</head>
+<body>
+    <form action="http://localhost:3000/auth/google/complete-registration" method="POST">
+        <input type="hidden" name="nombre" id="inputNombre">
+        <input type="hidden" name="correo" id="inputCorreo">
+        <input type="hidden" name="google_id" id="inputId">
+    <h2>¡Ya casi terminamos!</h2>
+    <p>Necesitamos tu teléfono para procesar tus pedidos:</p>
+    <input type="tel" name="telefono" placeholder="Ej: 8182838485" required>
+    <button type="submit">Finalizar Registro</button>
+</form>
+</body>
+<script>
+    // Este script lee la URL (?nombre=Chris&correo=...) y llena los campos ocultos
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById('inputNombre').value = urlParams.get('nombre');
+        document.getElementById('inputCorreo').value = urlParams.get('correo');
+        document.getElementById('inputId').value = urlParams.get('id');
+</script>
+</html>

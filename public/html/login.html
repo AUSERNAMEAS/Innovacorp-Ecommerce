@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Iniciar / Crear Cuenta - Fake Shop</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+
+<header>
+    <img src="../img/logo/logo.jpg" alt="Logo Fake Shop" style="height:48px;vertical-align:middle;">
+    <button class="btn-iniciarSesion" id="btnBackToHome" onclick="window.location.href='FakeShop.html'">
+        Volver al Inicio
+    </button>
+</header>
+
+<main class="container">
+    <section class="auth-container">
+        
+        <div class="auth-card" id="login-card">
+            <h2>Iniciar Sesión</h2>
+            <p class="muted">Accede con tu correo y contraseña.</p>
+            
+            <form id="login-form" action="http://localhost:3000/api/search-user" method="POST">
+                <div class="form-group">
+                    <label for="login-email">Correo electrónico</label>
+                    <input id="login-email" name="loginEmail" type="email" required placeholder="ejemplo@correo.com">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Contraseña</label>
+                    <input id="login-password" name="loginPassword" type="password" required placeholder="********">
+                </div>
+                <button type="submit" class="btn">Entrar</button>
+            </form>
+
+            <div class="separator">
+                <span>o continúa con</span>
+            </div>
+
+            <a href="http://localhost:3000/auth/google" class="btn-google">
+                <img src="../img/logo/google_logo.jpg" alt="Google Logo">
+                Google
+            </a>
+
+            <p class="switch-auth">
+                ¿No tienes cuenta? <a href="javascript:void(0)" onclick="showRegister()">Regístrate aquí</a>
+            </p>
+        </div>
+
+        <div class="auth-card" id="create-card" style="display:none;">
+            <h2>Crear Cuenta</h2>
+            <p class="muted">Únete para guardar tus pedidos y favoritos.</p>
+            
+            <form id="register-form" action="http://localhost:3000/api/createUser" method="POST">
+                <div class="form-group">
+                    <label for="reg-name">Nombre completo</label>
+                    <input id="reg-name" name="name" type="text" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-email">Correo electrónico</label>
+                    <input id="reg-email" name="email" type="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Contraseña</label>
+                    <input id="reg-password" name="password" type="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-phone">Número telefónico</label>
+                    <input id="reg-phone" name="phone" type="number" required>
+                </div>
+                <button type="submit" class="btn">Crear cuenta</button>
+            </form>
+            
+            <p class="switch-auth">
+                ¿Ya tienes cuenta? <a href="javascript:void(0)" onclick="showLogin()">Inicia sesión</a>
+            </p>
+        </div>
+
+    </section>
+</main>
+
+<script>
+    /**
+     * UI Toggle Logic
+     * Switches between Login and Register views without page refresh
+     */
+
+    // Switches view to the Registration form
+    function showRegister() {
+        document.getElementById('login-card').style.display = 'none';
+        document.getElementById('create-card').style.display = 'block';
+    }
+
+    // Switches view back to the Login form
+    function showLogin() {
+        document.getElementById('create-card').style.display = 'none';
+        document.getElementById('login-card').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
