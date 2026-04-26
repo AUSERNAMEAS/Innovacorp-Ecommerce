@@ -148,7 +148,7 @@ async function loadOrders()
                 <p>Estado: ${order.estado_pedido}</p>
 
                  <div class="order-button">
-                    <button class="btn-show-details">Ver detalles</button>
+                    <a href="ordersDetails.html?id=${order.id_pedido}" class="btn-ver-detalles">Ver Detalles</a>
                 </div>
             </div>
             `;

@@ -1,6 +1,6 @@
 const {searchOrdersByUserId} = require('../models/searchUser.model');
 const {getUserByEmail} = require('../models/createNewOrder.model');
-const { getUserCustomRequests,getBasicInfoUser,updatePhoneNumber} = require('../models/userPage.model');
+const { getUserCustomRequests,getBasicInfoUser,updatePhoneNumber,orderInfo} = require('../models/userPage.model');
 
 
 
@@ -80,4 +80,19 @@ async function updatePhoneNumberController(req, res) {
     }
 }
 
-module.exports = { loadOrdersUser , loadCustomRequestsUser, getBasicInfoUserController, updatePhoneNumberController};
+async function orderInfoController(req, res) {
+    try {
+        const { orderId } = req.params;
+        const result = await orderInfo(orderId);
+        // Si result es null (la BD no regresó nada)
+        if (!result) {
+            return res.status(404).json({ error: 'El pedido no existe o le faltan datos' });
+        }
+        res.json({ success: true, data: result });
+    } catch (error) {
+        console.error('Error loading order info:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+}
+
+module.exports = { loadOrdersUser , loadCustomRequestsUser, getBasicInfoUserController, updatePhoneNumberController, orderInfoController};

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>InnovaCorp | Detalles del Pedido</title>
+    </head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px;">
+
+    <nav style="max-width: 900px; margin: 0 auto 20px;">
+        <a href="userAccount.html" style="text-decoration: none; color: #333; font-weight: bold;">
+            ← Volver a mi perfil
+        </a>
+    </nav>
+
+    <div style="max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);;">
+        
+        <header style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 20px; margin-bottom: 20px;">
+            <div>
+                <h1 style="margin: 0; color: #2c3e50;">Pedido #<span id="ui-order-id">--</span></h1>
+                <p style="margin: 5px 0 0; color: #7f8c8d;">Fecha: <span id="ui-date">--/--/----</span></p>
+            </div>
+            <div>
+                <span id="ui-status" style="background: #27ae60; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9em;">--</span>
+            </div>
+        </header>
+
+        <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+            
+            <section style="flex: 2; min-width: 300px;">
+                <h2 style="color: #2c3e50;">Artículos Comprados</h2>
+                <div id="product-list-container" style="display: flex; flex-direction: column; gap: 15px;">
+                    <p style="color: #999;">Cargando productos...</p>
+                </div>
+            </section>
+
+            <aside style="flex: 1; min-width: 250px; background: #f9fbfb; padding: 20px; border-radius: 8px; border: 1px solid #eee;">
+                <h3 style="margin-top: 0; color: #2c3e50;">Resumen del Pago</h3>
+                <p style="font-size: 1.5em; font-weight: bold; color: #e67e22; margin: 10px 0;">$<span id="ui-total">0.00</span></p>
+                
+                <hr style="border: 0; border-top: 1px solid #ddd; margin: 20px 0;">
+                
+                <h3 style="color: #2c3e50;">Dirección de Envío</h3>
+                <p id="ui-address" style="line-height: 1.5; color: #555;">...</p>
+                
+                <hr style="border: 0; border-top: 1px solid #ddd; margin: 20px 0;">
+                
+                <h3 style="color: #2c3e50;">Notas</h3>
+                <p id="ui-notes" style="font-size: 0.9em; color: #777; font-style: italic;">...</p>
+            </aside>
+
+        </div>
+    </div>
+
+    <script src="../javascript/orderDetails.js"></script>
+</body>
+</html>

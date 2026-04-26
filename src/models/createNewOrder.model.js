@@ -25,7 +25,7 @@ async function getUserByEmail(email)
 }
     
 
-async function insertOrder(transaction,idUser, paymentMethod,total) 
+async function insertOrder(transaction,idUser, paymentMethod,total,description) 
 {
     try
     {
@@ -33,11 +33,12 @@ async function insertOrder(transaction,idUser, paymentMethod,total)
         const result = await request.
         input('id_cliente', idUser).
         input('metodo_pago', paymentMethod).
-        input('total', total). 
+        input('total', total).
+        input('descripcion', description).
         query(`
-            INSERT INTO pedido (id_cliente, fecha_pedido, estado_pedido, metodo_pago, total)
+            INSERT INTO pedido (id_cliente, fecha_pedido, estado_pedido, metodo_pago, total, detalle_string_pedido)
             OUTPUT INSERTED.id_pedido
-            VALUES (@id_cliente, GETDATE(), 'Pendiente', @metodo_pago, @total)
+            VALUES (@id_cliente, GETDATE(), 'Pendiente', @metodo_pago, @total, @descripcion)
             `);
         //if the insert didnt return anything, throw an error
         if (!result.recordset.length) 

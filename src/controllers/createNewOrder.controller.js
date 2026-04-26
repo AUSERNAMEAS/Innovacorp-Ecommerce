@@ -28,7 +28,7 @@ async function createNewOrder(req, res)
         const userID = userRaw.id_cliente;
         const total = datos.total_final;
         //here we can create the order  
-        const orderID = await insertOrder (transaction,userID, datos.metodo_pago,total);
+        const orderID = await insertOrder (transaction,userID, datos.metodo_pago,total,datos.descripcion);
         // then we update and insert the order details
         await insertOrderDetails(transaction, orderID, userID, datos.carrito);
 

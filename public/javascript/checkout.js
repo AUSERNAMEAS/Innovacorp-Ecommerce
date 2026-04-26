@@ -13,6 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Obtener carrito guardado
     const carritoString = sessionStorage.getItem('carritoTemporal');
     const carrito = JSON.parse(carritoString || '[]');
+    //console.log("Carrito cargado:", carrito);
+    const descripcionPedido = carrito.map(item => {
+    // Si tiene talla la ponemos, si no, lo dejamos normal
+    const detalleTalla = item.talla ? ` (Talla: ${item.talla})` : '';
+    return `${item.quantity}x ${item.nombre}${detalleTalla}`;
+}).join(', ');
+
+console.log("Descripción del pedido:", descripcionPedido);
+
 
     
 
@@ -54,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 metodo_pago: 'paypal',
                 total_final: totalPagar,
                 costo_envio: costoEnvio,
+                descripcion: descripcionPedido,
                 paypal_id: data.orderID
             };
 
@@ -68,7 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
 
                 if (result.success) {
-                    alert('Pago completado ✅');
+                    console.log("Pedido creado con éxito:", result);
+                    alert('Pago exitoso y pedido creado');
                     sessionStorage.removeItem('carritoTemporal');
                     window.location.href = '/html/FakeShop.html';
                 } else {
