@@ -7,7 +7,7 @@ MAIN PAGE
 2. add sql transaction when u create a new order-----------------------
 3. add paypal and card methods----------------
 4. basic security----------
-5. pageUser add functionality button verDetalles
+5. pageUser add functionality button verDetalles-----------
 6. add the customRequest to pageUser --------------------
 16. aff a filter to see the products
 
@@ -21,8 +21,8 @@ ADMIN PANEL
 10. add path url when u add a new product-----------------
 11. add verification and security to the panel
 12. add a method to modify and existing product----------
-13. in "ver detalles" also add the shipping adress
-14. fix that u can actually see the shirt size in ver detalles
+13. in "ver detalles" also add the shipping adress------------
+14. fix that u can actually see the shirt size in ver detalles----------
 15. add see more product with filters.
 
 

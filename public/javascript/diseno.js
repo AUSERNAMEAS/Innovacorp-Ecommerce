@@ -21,16 +21,16 @@ let productsShown = 3;
 function goToProduct(id){
     window.location.href = `../html/product.html?id=${id}`;
 } 
-
-function renderProducts() {
+// we use the same function to render the products but now we add a parameter to filter the products by category
+function renderProducts(filteredProducts = allProducts) {
     if (!productGrid) {
         console.error('No se encontró el contenedor #product-grid');
         return;
     }
     productGrid.innerHTML = '';
-    for (let i = 0; i < productsShown; i++) {
-        if (allProducts[i]) {
-            const product = allProducts[i];
+    for (let i = 0; i < filteredProducts.length; i++) {
+        if (filteredProducts[i]) {
+            const product = filteredProducts[i];
             const productCard = document.createElement('div');
             const isInactive = product.estado_producto && product.estado_producto.trim().toLowerCase() === 'inactivo';
             let sizeHTML = ``;
@@ -306,14 +306,6 @@ function removeFromCart(productId) {
     renderCart();
 }
 
-loadMoreBtn.addEventListener('click', () => {
-    productsShown += 7;
-    if (productsShown >= allProducts.length) {
-        productsShown = allProducts.length;
-        loadMoreBtn.style.display = 'none';
-    }
-    renderProducts();
-});
 
 function renderCart() {
     // if the cart is empty itll show a message
@@ -332,10 +324,12 @@ function renderCart() {
     cartItemsDiv.innerHTML = '';
     //itll make a new div for each element in the cart,
     cart.forEach(item => {
+        console.log('Renderizando item del carrito:', item);
         const itemDiv = document.createElement('div');
         itemDiv.className = 'cart-item';
         itemDiv.innerHTML = `
             <span>${item.nombre} ${item.talla ? `(Talla ${item.talla})` : ''}</span>
+            <img src="/${item.imagen}" alt="${item.nombre}" style="width:50px; height:auto;">
             <div class="cart-quantity">
                 <button onclick="decreaseQuantity(${item.id_producto})">-</button>
                 <span>${item.quantity}</span>
@@ -447,6 +441,26 @@ async function verifyUserSession() {
 checkoutBtn.addEventListener('click', () => {
     sessionStorage.setItem('carritoTemporal', JSON.stringify(cart));
     window.location.href = '../html/checkout.html';
+});
+
+document.getElementById('category-filter').addEventListener('change', (e) => {
+    const selectedCategory = e.target.value.toLowerCase();
+    const productGrid = document.getElementById('product-grid');
+    
+    // 1. Limpiar el contenedor
+    productGrid.innerHTML = '';
+
+    // 2. Filtrar el array
+    const filteredProducts = selectedCategory === 'all' 
+        ? allProducts 
+        : allProducts.filter(p => p.categoria.toLowerCase() === selectedCategory);
+
+    // 3. Volver a renderizar (usa la misma lógica que ya tienes para pintar las tarjetas)
+    if (filteredProducts.length === 0) {
+        productGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">No se encontraron productos en esta categoría.</p>';
+    } else {
+        renderProducts(filteredProducts);
+        }
 });
 
 document.addEventListener('DOMContentLoaded', () => {

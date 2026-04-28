@@ -142,6 +142,8 @@ total money,
 
 )
 
+alter table pedido add detalle_string_pedido varchar(255)
+
 select * from pedido
 delete from pedido
 
@@ -166,6 +168,13 @@ foreign key (id_producto) references producto(id_producto)
 
 
 )
+
+select pedido.id_pedido,pedido.id_cliente,fecha_pedido,estado_pedido,total,detalle_string_pedido,detalle_pedido.id_producto,cantidad,imagen,detalle_pedido.precio_unitario,envio.direccion_envio from pedido
+INNER JOIN detalle_pedido ON pedido.id_pedido = detalle_pedido.id_pedido  INNER JOIN producto ON
+detalle_pedido.id_producto = producto.id_producto
+INNER JOIN envio ON envio.id_pedido = pedido.id_pedido
+
+where pedido.id_pedido = 2019
 
 select * from detalle_pedido
 delete from detalle_pedido

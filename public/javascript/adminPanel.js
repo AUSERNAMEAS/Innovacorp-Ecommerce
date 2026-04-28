@@ -646,29 +646,52 @@ setupNavigation();
 
 
 //open modal to show details of the order
-document.addEventListener("click", function(e){
+document.addEventListener("click", async function(e){
 
   if(!e.target.classList.contains("view-order-btn")) return;
 
   const orderId = e.target.getAttribute("data-id");
-// we saved the data before en the global object windos.orderData
-//to use it later and filter js the order we clicked
-  const productos = window.ordersData.filter(
-    p => p.id_pedido == orderId
-  );
-  console.log("Productos del pedido seleccionado:", productos);
+
 
   const modalTitle = document.getElementById("orderTitle");
   const list = document.getElementById("orderProducts");
+  const extraInfo = document.getElementById("orderExtraInfo");
+  // 1. Mostrar el modal inmediatamente en estado de "Carga"
+    modalTitle.textContent = "Cargando Pedido #" + orderId + "...";
+    list.innerHTML = "<li>Cargando datos...</li>";
 
-  modalTitle.textContent = "Detalles del Pedido #" + orderId;
+  try{
+    const response = await fetch(`http://localhost:3000/api/user-page/order-info/${orderId}`);
+    const result = await response.json();
+    if (result.success && result.data) {
+            const order = result.data;
 
+            // 3.title
+            modalTitle.textContent = "Detalles del Pedido #" + order.id_pedido;
 
-// then we build the modal
-  list.innerHTML = productos.map(p => `
-      <li>${p.nombre_producto} - Cantidad: ${p.cantidad}</li>
-  `).join("");
+            // 4. allproducts
+            list.innerHTML = order.productos.map(p => `
+                <li>Producto ID: ${p.id_producto} - Cantidad: ${p.cantidad}</li>
+            `).join("");
 
+            // 5. Pintar la descripción y el envío (La nueva funcionalidad)
+            if(extraInfo) {
+                extraInfo.innerHTML = `
+                    <hr>
+                    <p><strong>📍 Dirección de Envío:</strong> ${order.direccion_envio}</p>
+                    <p><strong>📝 Notas / Descripción:</strong> ${order.detalle_string_pedido}</p>
+                `;
+            }
+        } else {
+            modalTitle.textContent = "Error al cargar pedido";
+            list.innerHTML = `<li>${result.message || 'No se encontró información'}</li>`;
+        }
+
+  }catch(error){
+    console.error("Error al cargar detalles del pedido:", error);
+  }
+
+  
   //shoes the modal
   document.getElementById("orderModal").style.display = "block";
 
