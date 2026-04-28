@@ -336,3 +336,5 @@ BEGIN
 END;
 
 select * from gestion_pedidos_borrados
+select id_pedido,pedido.id_cliente,fecha_pedido, total, estado_pedido,detalle_string_pedido,correo from pedido
+INNER JOIN cliente ON pedido.id_cliente = cliente.id_cliente

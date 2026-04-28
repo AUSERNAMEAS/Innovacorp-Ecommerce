@@ -751,4 +751,55 @@ window.closeEditModal = function() {
 document.getElementById("closeOrderModal").addEventListener("click", function(){
   document.getElementById("orderModal").style.display = "none";
 });
+
+
+
+// Lógica para mostrar/ocultar historial
+  const toggleHistoryBtn = document.getElementById('toggle-history-btn');
+  const historyContainer = document.getElementById('full-history-container');
+  const btnSearchHistory = document.getElementById('btn-search-history');
+  
+  toggleHistoryBtn.addEventListener('click', () => {
+      if (historyContainer.style.display === 'none') {
+          historyContainer.style.display = 'block';
+          toggleHistoryBtn.textContent = 'Ocultar historial';
+      } else {
+          historyContainer.style.display = 'none';
+          toggleHistoryBtn.textContent = 'Ver historial completo';
+      }
+  });
+
+
+  // Lógica para buscar en el historial
+  btnSearchHistory.addEventListener('click', async () => {
+      const searchEmail = document.getElementById('search-email').value;
+      
+      const tbody = document.getElementById('fullHistoryTableBody');
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Buscando...</td></tr>';
+
+      try {
+          // Usamos query params para mandar la fecha y nombre al backend
+          const response = await fetch(`http://localhost:3000/api/admin-panel/filteredOrders/${searchEmail}`);
+          const result = await response.json();
+
+          if (result.success && result.data.length > 0) {
+              tbody.innerHTML = result.data.map(pedido => `
+                  <tr>
+                      <td>#${pedido.id_pedido}</td>
+                      <td>${pedido.correo}</td>
+                      <td>${pedido.fecha_pedido}</td>
+                      <td>$${parseFloat(pedido.total).toFixed(2)}</td>
+                      <td>${pedido.estado_pedido}</td>
+                      <td>${pedido.detalle_string_pedido}</td>
+
+                  </tr>
+              `).join('');
+          } else {
+              tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No se encontraron pedidos con ese email.</td></tr>';
+          }
+      } catch (error) {
+          console.error("Error buscando historial:", error);
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Error de conexión.</td></tr>';
+      }
+  });
 });

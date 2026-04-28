@@ -72,12 +72,33 @@
             <tbody id="ordersTableBody"></tbody>
           </table>
 
-          <button
-            id="save-orders-btn"
-            class="btn-product-action"
-          >
-            Actualizar Estados de Pedidos
-          </button>
+          <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+            <button id="save-orders-btn" class="btn-product-action">Actualizar Estados de Pedidos</button>
+            <button id="toggle-history-btn" class="btn-product-action" style="background-color: #007bff;">Ver historial completo</button>
+          </div>
+        </div>
+
+        <div id="full-history-container" style="display: none; margin-top: 2rem; border-top: 2px solid #eee; padding-top: 1rem;">
+            <h3>Historial de Pedidos (Búsqueda Avanzada)</h3>
+            
+            <div style="display: flex; gap: 10px; margin-bottom: 15px; align-items: center;">
+                <input type="text" id="search-email" placeholder="email del cliente..." style="padding: 5px; flex: 1;">
+                <button id="btn-search-history" class="btn-product-action" style="margin: 0; padding: 5px 15px;">Buscar</button>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID Pedido</th><th>Cliente</th><th>Fecha</th><th>Total</th><th>Estado</th><th>Detalles</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fullHistoryTableBody">
+                        <tr><td colspan="5" style="text-align:center;">Ingresa parámetros de búsqueda para cargar el historial.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         </div>
       </section>
 

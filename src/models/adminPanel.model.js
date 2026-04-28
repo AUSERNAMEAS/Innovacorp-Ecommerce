@@ -273,6 +273,24 @@ async function reactivateProductLogic(id) {
         .query("UPDATE producto SET estado_producto = 'Activo' WHERE id_producto = @id");
 
 }
+
+async function getfilteredOrders(email){
+    try {
+    const pool = await poolPromise;
+    const result = await pool.request()
+    .input('email', email)
+    .query(`
+        select id_pedido,pedido.id_cliente,FORMAT(fecha_pedido, 'yyyy-MM-dd') AS fecha_pedido, total, estado_pedido,detalle_string_pedido,correo from pedido
+INNER JOIN cliente ON pedido.id_cliente = cliente.id_cliente where correo = @email
+`
+
+) 
+return result.recordset;
+} catch (error) {
+    console.error("Error fetching filtered orders:", error);
+    throw error;
+}
+}
 module.exports = {
     getOrders,
     getPendingShipments,
@@ -289,6 +307,7 @@ module.exports = {
     deleteCustomRequestById,
     updateProductDetails,
     deleteProductLogic,
-    reactivateProductLogic
+    reactivateProductLogic,
+    getfilteredOrders
     
 };

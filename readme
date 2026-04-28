@@ -9,8 +9,9 @@ MAIN PAGE
 4. basic security----------
 5. pageUser add functionality button verDetalles-----------
 6. add the customRequest to pageUser --------------------
-16. aff a filter to see the products
-
+16. aff a filter to see the products-----------------------
+17. make a verification to make sure the user is using an account
+18. add alerts more stylish
 
 ADMIN PANEL
 
@@ -23,7 +24,9 @@ ADMIN PANEL
 12. add a method to modify and existing product----------
 13. in "ver detalles" also add the shipping adress------------
 14. fix that u can actually see the shirt size in ver detalles----------
-15. add see more product with filters.
+15. add see more product with filters.---------------------
+16. fix date format in the section pedidos
+
 
 
 things that i learned/shouldve known

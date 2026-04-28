@@ -116,7 +116,7 @@ async function saveNewPhone() {
         });
 
         const data = await response.json();
-
+        
         if (data.success) {
             document.getElementById('displayPhone').innerText = newPhone;
             closeEditModal(); // Cerramos el modal automáticamente al tener éxito

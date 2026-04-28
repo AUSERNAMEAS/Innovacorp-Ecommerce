@@ -1,4 +1,4 @@
-const {getOrders, getPendingShipments, getMonthlySales,getRecentShipments, getRecentOrders, getPendingCustomRequests, getStockProducts,addNewProduct,updateStockProducts,acceptCustomRequest, updateOrderStatus,deleteOrderById,deleteCustomRequestById,updateProductDetails,deleteProductLogic,reactivateProductLogic} = require ('../models/adminPanel.model')
+const {getOrders, getPendingShipments, getMonthlySales,getRecentShipments, getRecentOrders, getPendingCustomRequests, getStockProducts,addNewProduct,updateStockProducts,acceptCustomRequest, updateOrderStatus,deleteOrderById,deleteCustomRequestById,updateProductDetails,deleteProductLogic,reactivateProductLogic,getfilteredOrders} = require ('../models/adminPanel.model')
 
 async function fillDashboard(req, res)
 {
@@ -173,6 +173,17 @@ async function reactivateProduct(req, res) {
     }
 }
 
+async function getfilteredOrdersController(req, res) {
+    try {
+        const { email } = req.params;
+        const orders = await getfilteredOrders(email);
+        console.log("Orders for email:", email, orders);
+        res.json({ success: true, data: orders });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+}
+
 module.exports = {
     fillDashboard,
     addNewProductController,
@@ -183,5 +194,6 @@ module.exports = {
     deleteCustomRequestController,
     updateProduct,
     deleteProduct,
-    reactivateProduct
+    reactivateProduct,
+    getfilteredOrdersController
 }
