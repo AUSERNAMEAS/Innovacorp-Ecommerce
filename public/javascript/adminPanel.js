@@ -11,11 +11,12 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const response = await fetch("http://localhost:3000/api/admin-panel");
       const result = await response.json();
+        if (!result.success) {
+            console.error("Error en la API:", result.message);
+            return;
+        }
+      //const result = await response.json();
 
-      if (!result.success) {
-        console.error("Error en la API:", result.message);
-        return;
-      }
 
       const data = result.data;
 
@@ -66,22 +67,36 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
     async function deleteOrder(id) {
-    if(!confirm("¿Borrar pedido?")) return;
+      const confirmacion = await Swal.fire({
+        title: '¿Borrar pedido?',
+        text: "Esta acción no se puede deshacer.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, borrar',
+        cancelButtonText: 'Cancelar'
+    });
+    if(!confirmacion.isConfirmed) return;
     try {
         const res = await fetch(`http://localhost:3000/api/admin-panel/delete-order/${id}`, { method: 'DELETE' });
         const result = await res.json();
-        if(result.success) window.location.reload();
-        else alert("Error: " + result.message);
+        if(result.success) {
+          await Swal.fire('Pedido Eliminado', result.message, 'success');
+        }
+        else await Swal.fire('Error', result.message, 'error');
     } catch (error) {
         console.error("Error deleting order:", error);
-        alert("Error al eliminar el pedido");
+        await Swal.fire('Error', 'Error al eliminar el pedido', 'error');
     }
 }
 window.deleteOrder = deleteOrder; // to be able to use it globally in the html
 
 
   async function loadTable() {
-    const response = await fetch("http://localhost:3000/api/admin-panel");
+    const response = await fetch("http://localhost:3000/api/admin-panel", {
+        headers: { 'Accept': 'application/json' } 
+    });
     const result = await response.json();
     console.log(result);
 
@@ -229,7 +244,9 @@ window.deleteOrder = deleteOrder; // to be able to use it globally in the html
 
 
   async function loadStockTable() {
-    const response = await fetch('http://localhost:3000/api/admin-panel');
+    const response = await fetch('http://localhost:3000/api/admin-panel', {
+      headers: { 'Accept': 'application/json' }
+    });
     const result = await response.json();
 
     if (!result.success) return;
@@ -275,25 +292,50 @@ window.deleteOrder = deleteOrder; // to be able to use it globally in the html
 }
 
   async function deleteProduct(id) {
+        const confirmation = await Swal.fire({
+            title: '¿Desactivar producto?',
+            text: "El producto se desactivará y no será visible en la tienda.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dc3545',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Sí, desactivar',
+            cancelButtonText: 'Cancelar'
+        });
 
-        if (confirm("¿Deseas desactivar este producto?")) {
+        if (confirmation.isConfirmed) {
             const res = await fetch(`/api/admin-panel/delete-product/${id}`, {
                 method: 'PUT', // put to change the state
                 headers: { 'Content-Type': 'application/json' }
             });
-            if (res.ok) location.reload();
+            if (res.ok){
+              Swal.fire('Producto Desactivado', 'El producto ha sido desactivado y ya no es visible en la tienda.', 'success');
+            } location.reload();
         }
     }
 window.deleteProduct = deleteProduct; // to be able to use it globally in the html
 
 async function reactivateProduct(id) {
-    if (confirm("¿Deseas reactivar este producto para que sea visible en la tienda?")) {
+  const confirmacion = await Swal.fire({
+        title: '¿Reactivar producto?',
+        text: "El producto volverá a estar visible en la tienda.",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Sí, reactivar',
+        cancelButtonText: 'Cancelar'
+    });
+    if (confirmacion.isConfirmed) {
         const res = await fetch(`/api/admin-panel/reactivate-product/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' }
 
         });
-        if (res.ok) location.reload();
+        if (res.ok) {
+            await Swal.fire('Producto Reactivado', 'El producto ha sido reactivado y ahora es visible en la tienda.', 'success');
+            location.reload();
+        }
     }
 }
 window.reactivateProduct = reactivateProduct;
@@ -301,7 +343,18 @@ window.reactivateProduct = reactivateProduct;
 // public/javascript/adminPanel.js
 
 async function deleteCustomRequest(id) {
-    if (!confirm("¿Estás seguro de que deseas eliminar esta solicitud?")) return; //
+  const confirmation = await Swal.fire({
+    title: '¿Eliminar solicitud?',
+    text: "Esta acción no se puede deshacer.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#dc3545',
+    cancelButtonColor: '#6c757d',
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar'
+  });
+
+  if (!confirmation.isConfirmed) return;
 
     try {
         const response = await fetch(`http://localhost:3000/api/admin-panel/delete-custom-request/${id}`, {
@@ -310,7 +363,7 @@ async function deleteCustomRequest(id) {
 
         const result = await response.json(); //
         if (result.success) {
-            alert(result.message); //
+            await Swal.fire('Solicitud Eliminada', result.message, 'success');
             window.location.reload(); //
         }
     } catch (error) {
@@ -379,13 +432,13 @@ loadPage();
       const result = await response.json();
 
       if (result.success) {
-        alert(result.message);
+        await Swal.fire('Estados de Pedidos Actualizados', result.message, 'success');
         window.location.reload();
       } else {
-        alert("Error: " + result.message);
+        await Swal.fire('Error', "Error: " + result.message, 'error');
       }
     } catch (error) {
-      alert("Error de conexión al intentar actualizar los pedidos.");
+      await Swal.fire('Error', "Error de conexión al intentar actualizar los pedidos.", 'error');
     } finally {
       saveOrdersBtn.textContent = "Actualizar Estados de Pedidos";
       saveOrdersBtn.disabled = false;
@@ -424,12 +477,12 @@ loadPage();
       const result = await response.json();
 
       if (result.success) {
-        alert(result.message);
+        await Swal.fire('Stock Actualizado', result.message, 'success');
       } else {
-        alert(`Error al guardar: ${result.message}`);
+        await Swal.fire('Error', `Error al guardar: ${result.message}`, 'error');
       }
     } catch (error) {
-      alert("Error de conexión con el servidor al intentar guardar el stock.");
+      await Swal.fire('Error', "Error de conexión con el servidor al intentar guardar el stock.", 'error');
     } finally {
       saveStockBtn.textContent = "Guardar Cambios de Stock";
       saveStockBtn.disabled = false;
@@ -478,16 +531,16 @@ loadPage();
       const result = await response.json();
 
       if (result.success) {
-        alert(result.message);
+        await Swal.fire('Producto Añadido', result.message, 'success');
         addProductForm.reset(); // Limpia el formulario
         // Recarga la página para que el nuevo producto aparezca en la tabla de stock
         window.location.reload();
       } else {
         // Muestra el mensaje de error del servidor (incluye errores SQL)
-        alert(`Error al añadir el producto: ${result.message}`);
+        await Swal.fire('Error', `Error al añadir el producto: ${result.message}`, 'error');
       }
     } catch (error) {
-      alert("Error de conexión al servidor al añadir producto.");
+      await Swal.fire('Error', "Error de conexión al servidor al añadir producto.", 'error');
     } finally {
       btnAddProduct.textContent = "Añadir Producto"; // Restaura el texto del botón
       btnAddProduct.disabled = false;
@@ -518,7 +571,7 @@ loadPage();
         console.log(result);
 
         if (!result.success) {
-          alert("No se pudo cargar la imagen");
+          await Swal.fire('Error', "No se pudo cargar la imagen", 'error');
           return;
         }
 
@@ -732,7 +785,7 @@ document.getElementById('edit-product-form').addEventListener('submit', async (e
 
         const result = await res.json();
         if (result.success) {
-            alert("Producto actualizado con éxito");
+            await Swal.fire('Producto Actualizado', result.message, 'success');
             location.reload();
         }
     } catch (error) {
@@ -802,4 +855,10 @@ document.getElementById("closeOrderModal").addEventListener("click", function(){
           tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Error de conexión.</td></tr>';
       }
   });
-});
+
+document.querySelector(".logOut-button").addEventListener("click", async function(){
+  // Clear the token from localStorage
+  window.location.href = "http://localhost:3000/api/delete-user-session";
+})
+
+})

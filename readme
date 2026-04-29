@@ -10,8 +10,8 @@ MAIN PAGE
 5. pageUser add functionality button verDetalles-----------
 6. add the customRequest to pageUser --------------------
 16. aff a filter to see the products-----------------------
-17. make a verification to make sure the user is using an account
-18. add alerts more stylish
+17. make a verification to make sure the user is using an account-----------------
+18. add alerts more stylish-------
 
 ADMIN PANEL
 
@@ -26,6 +26,16 @@ ADMIN PANEL
 14. fix that u can actually see the shirt size in ver detalles----------
 15. add see more product with filters.---------------------
 16. fix date format in the section pedidos
+17. prevent common errors.
+18. fix image position
+19. change basic info in fakeshop.htmk
+20. be able to change ur address
+21. add verification to not let buy without an account
+22. chnage canvas(if we get selected)
+23. add google maps when u are choosing ur addffess
+24. button whatsapp help
+25. add error modal when u log in without an account
+26. move cart 
 
 
 

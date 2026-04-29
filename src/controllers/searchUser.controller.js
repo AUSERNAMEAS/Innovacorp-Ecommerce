@@ -26,12 +26,19 @@ async function searchUser(req, res)
         {
             // now we save the user session
             saveUserSessionFunction(req, loginEmail);
-            res.redirect('/html/FakeShop.html');
+            res.json({
+                success: true,
+                redirectUrl: 'http://localhost:3000/html/FakeShop.html' //relative route
+            })
         }
         else if (passwordCompared && user.rol === 'Administrador')
         {
-            saveUserSessionFunction(req, loginEmail);
-            res.redirect('/html/adminPanel.html');
+            saveUserSessionFunction(req, loginEmail, 'Administrador');
+            res.json({
+                success: true,
+                redirectUrl: 'http://localhost:3000/api/admin-panel/view' //relative route
+            })
+            
         }/*
         else
         {

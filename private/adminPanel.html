@@ -4,19 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Panel de Administración - Fake Shop</title>
-    <link rel="stylesheet" href="../css/main.css" />
-    <link rel="stylesheet" href="../css/admin.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/admin.css" />
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   </head>
   <body>
     <header>
       <img
-        src="../img/logo/logo.jpg"
+        src="/img/logo/logo.jpg"
         alt="Logo Fake Shop"
         style="height: 48px; vertical-align: middle"
       />
       <span style="margin-left: 20px">Panel de Administrador: </span>
-      <a href="backend/cerrarSesion.php" style="margin-left: 12px"
-        >Cerrar sesión</a
+      <button class="logOut-button"
+        >Cerrar sesión</button
       >
     </header>
 
@@ -281,6 +283,6 @@
     </div>
 </div>
 
-    <script src="../javascript/adminPanel.js"></script>
+    <script src="/javascript/adminPanel.js"></script>
   </body>
 </html>

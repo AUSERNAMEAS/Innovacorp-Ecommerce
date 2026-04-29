@@ -6,6 +6,8 @@
     <title>Iniciar / Crear Cuenta - Fake Shop</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/login.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
 
@@ -23,7 +25,7 @@
             <h2>Iniciar Sesión</h2>
             <p class="muted">Accede con tu correo y contraseña.</p>
             
-            <form id="login-form" action="http://localhost:3000/api/search-user" method="POST">
+            <form id="login-form" method="POST">
                 <div class="form-group">
                     <label for="login-email">Correo electrónico</label>
                     <input id="login-email" name="loginEmail" type="email" required placeholder="ejemplo@correo.com">
@@ -99,6 +101,8 @@
         document.getElementById('login-card').style.display = 'block';
     }
 </script>
+
+<script src="../javascript/login.js"></script>
 
 </body>
 </html>

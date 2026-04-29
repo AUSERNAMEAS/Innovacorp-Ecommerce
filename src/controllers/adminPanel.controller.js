@@ -1,7 +1,8 @@
 const {getOrders, getPendingShipments, getMonthlySales,getRecentShipments, getRecentOrders, getPendingCustomRequests, getStockProducts,addNewProduct,updateStockProducts,acceptCustomRequest, updateOrderStatus,deleteOrderById,deleteCustomRequestById,updateProductDetails,deleteProductLogic,reactivateProductLogic,getfilteredOrders} = require ('../models/adminPanel.model')
-
+const path = require('path');
 async function fillDashboard(req, res)
 {
+    
     try
     {
         const orders = await getOrders();
@@ -24,6 +25,19 @@ async function fillDashboard(req, res)
         stockProducts: stockProducts
     }
         });
+    }
+    catch (error)
+    {
+        res.status(500).json({ success: false, message: error.message });
+    }
+    
+}
+
+async function loadPage(req, res)
+{
+    try
+    {
+        res.sendFile(path.join(__dirname, '../../private/adminPanel.html'));
     }
     catch (error)
     {
@@ -195,5 +209,6 @@ module.exports = {
     updateProduct,
     deleteProduct,
     reactivateProduct,
-    getfilteredOrdersController
+    getfilteredOrdersController,
+    loadPage
 }

@@ -1,9 +1,10 @@
-function saveUserSessionFunction(req, email)
+function saveUserSessionFunction(req, email,rol = 'cliente')
 {
     //made it promise so we can use await
     return new Promise((resolve, reject) => {
         req.session.user={
         email,
+        rol,
         logged: true
     }
 
@@ -56,9 +57,31 @@ function verifySessionFunction(req, res, next) {
   });
 }
 
+function verifyAdminFunction(req, res, next) {
+    if (req.session && req.session.user.rol === 'Administrador') {
+        // if they are an admin,let them
+        next(); 
+    } else {
+        // someone tryin to access to admin route without being admin, we log it and give them the boot
+        console.warn(`⚠️ Intento de acceso no autorizado detectado en la ruta: ${req.originalUrl}`);
+
+        // Si la ruta empieza con '/api' (es decir, intentó usar un endpoint directamente)
+        if (req.originalUrl.startsWith('/api')) {
+            return res.status(403).json({ 
+                success: false, 
+                message: 'Acceso denegado. Se requieren privilegios de Administrador.' 
+            });
+        } else {
+
+            return res.redirect('/?error=acceso_denegado'); 
+        }
+    }
+}
+
 
 module.exports = {
     saveUserSessionFunction,
     deleteUserSessionFunction,
-    verifySessionFunction
+    verifySessionFunction,
+    verifyAdminFunction
 }

@@ -99,7 +99,11 @@ function addToCart(productId, talla) {
         .reduce((sum, item) => sum + item.quantity, 0);
 
     if (totalEnCarrito >= productToAdd.stock) {
-        alert(`Solo hay ${productToAdd.stock} unidades disponibles en total.`);
+        Swal.fire({
+            icon: 'warning',
+            title: 'Stock Insuficiente',
+            text: `Solo hay ${productToAdd.stock} unidades disponibles en total.`
+        });
         return;
     }
 
@@ -116,10 +120,26 @@ function addToCart(productId, talla) {
     // this change the alert to show the size if it exists
     if (talla) 
     {
-        alert(`${productToAdd.nombre} (Talla ${talla}) agregado al carrito.`);
+        Swal.fire({
+        icon: 'success',
+        title: '¡Agregado!',
+        text: talla ? `${productToAdd.nombre} (Talla ${talla}) agregado al carrito.` : `${productToAdd.nombre} agregado al carrito.`,
+        timer: 1500, // Closes after 1.5 seconds
+        showConfirmButton: false,
+        position: 'top-end',
+        toast: true
+    });
     } else 
     {
-        alert(`${productToAdd.nombre} agregado al carrito.`);
+        Swal.fire({
+        icon: 'success',
+        title: '¡Agregado!',
+        text: `${productToAdd.nombre} agregado al carrito.`,
+        timer: 1500, // Closes after 1.5 seconds
+        showConfirmButton: false,
+        position: 'top-end',
+        toast: true
+    });
     }
     renderCart();
 }
@@ -269,14 +289,14 @@ async function enviarSolicitud(e) {
         //if the response is success we will clear the fields
         if (result.success) 
         {
-            alert(result.message);
+            Swal.fire('¡Éxito!', result.message, 'success');
             document.getElementById('product-type').value = '';
             document.getElementById('instructions').value = '';
             customImageInput.value = null;
         }
         else
         {
-            alert('Error al enviar la solicitud de personalización: ' + result.message);
+            Swal.fire('Error', 'Error al enviar la solicitud de personalización: ' + result.message, 'error');
         }
         }  
         catch (error) 
@@ -369,7 +389,11 @@ function increaseQuantity(productId) {
     
     }
     else{
-        alert(`Límite alcanzado: Solo puedes agregar un máximo de ${item.stock} por producto/talla.`);
+        Swal.fire({
+            icon: 'info',
+            title: 'Límite alcanzado',
+            text: `Solo puedes agregar un máximo de ${item.stock} por producto/talla.`
+        });
     }
 }
 

@@ -1,6 +1,8 @@
 const addUser = require('../models/createNewUser.model');
+const searchRequest = require('../models/searchUser.model');
 const bcrypt = require('bcrypt'); // importing bcrypt to hash passwords
 const {saveUserSessionFunction}= require('../utils/functions/userSessionFunctions');
+
 
 async function createUser(req, res) 
 {
@@ -18,6 +20,13 @@ async function createUser(req, res)
             { success: false, message: 'Faltan datos obligatorios.' });
 
         }
+    // we verufy if the user already exists by searching for the email in the database, if it does we send a response saying that the user already exists
+    const existingUser = await searchRequest.searchUserByEmail(email);
+    if (existingUser.length > 0)
+    {
+        return res.status(400).json({ alreadyExists: true, message: 'El usuario ya existe.' });
+    }
+    
         // now we can call the model function to create the new user and save the user session
     await addUser.createNewUser(name, passwordHash, email, phone);
     await saveUserSessionFunction(req, email);

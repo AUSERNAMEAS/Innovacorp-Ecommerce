@@ -79,25 +79,39 @@ console.log("Descripción del pedido:", descripcionPedido);
 
                 if (result.success) {
                     console.log("Pedido creado con éxito:", result);
-                    alert('Pago exitoso y pedido creado');
+                    await Swal.fire(
+                        '¡Pago Exitoso!',
+                        'Tu pedido ha sido creado correctamente.',
+                        'success'
+                    );
                     sessionStorage.removeItem('carritoTemporal');
                     window.location.href = '/html/FakeShop.html';
                 } else {
-                    alert(`Error: ${result.message}`);
+                    await Swal.Fire(
+                        'Error en la Order', result.message, 'error'
+                    )
                 }
 
             } catch (error) {
-                alert('Error de conexión con el servidor');
+                await Swal.fire(
+                    'Error en la Comunicación', 'Hubo un error al comunicarse con el servidor. Por favor, intenta nuevamente.', 'error'
+                );
+                console.error("Error creando pedido:", error);
             }
         },
 
-        onCancel: function () {
-            alert('Pago cancelado');
+        onCancel: async function () {
+            await Swal.fire(
+                'Pago Cancelado', 'Has cancelado el proceso de pago.', 'info'
+            );
+            console.log("Pago cancelado por el usuario.");
         },
 
-        onError: function (err) {
+        onError: async function (err) {
             console.error(err);
-            alert('Error en PayPal');
+            await Swal.fire(
+                'Error en el Pago', 'Ocurrió un error durante el proceso de pago. Por favor, intenta nuevamente.', 'error'
+            );
         }
 
     }).render('#paypal-button-container');
