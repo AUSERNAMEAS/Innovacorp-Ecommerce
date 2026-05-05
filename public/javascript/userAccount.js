@@ -29,6 +29,12 @@ async function loadUserAccount()
                 <section class="account-card">
                     <div class="userOrders"></div>
                 </section>
+                <a href="https://wa.me/8132221536?text=Hola,%20tengo%20una%20duda%20sobre%20mi%20diseño%20personalizado" 
+   target="_blank" 
+   class="btn-whatsapp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 20px; height: 20px;">
+    Necesitas una ayuda mas personalizada? Contáctanos por WhatsApp!!
+</a>
             </div>
 
             <div id="tabPersonalizados" class="tab-content" style="display: none;">
@@ -148,7 +154,11 @@ async function loadOrders()
                 <p>Estado: ${order.estado_pedido}</p>
 
                  <div class="order-button">
-                    <a href="ordersDetails.html?id=${order.id_pedido}" class="btn-ver-detalles">Ver Detalles</a>
+                    <a href="ordersDetails.html?id=${order.id_pedido}" class="btn-ver-detalles"><span>Ver Detalles</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+    </svg></a>
                 </div>
             </div>
             `;

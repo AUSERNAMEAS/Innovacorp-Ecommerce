@@ -20,22 +20,23 @@ ADMIN PANEL
 8. fix gmail error-----------------------
 9. implement stock limitation in the main page ------------- fix 2 sizes fixed
 10. add path url when u add a new product-----------------
-11. add verification and security to the panel
+11. add verification and security to the panel-------------
 12. add a method to modify and existing product----------
 13. in "ver detalles" also add the shipping adress------------
 14. fix that u can actually see the shirt size in ver detalles----------
 15. add see more product with filters.---------------------
 16. fix date format in the section pedidos
 17. prevent common errors.
-18. fix image position
-19. change basic info in fakeshop.htmk
+18. fix image position-----------------
+19. change basic info in fakeshop.htmk---------
 20. be able to change ur address
-21. add verification to not let buy without an account
+21. add verification to not let buy without an account--------
 22. chnage canvas(if we get selected)
 23. add google maps when u are choosing ur addffess
-24. button whatsapp help
-25. add error modal when u log in without an account
+24. button whatsapp help------------
+25. add error modal when u log in without an account-------------
 26. move cart 
+27. when stock hits 0,make it unclickeable
 
 
 

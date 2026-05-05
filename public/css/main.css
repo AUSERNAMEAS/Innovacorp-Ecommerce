@@ -284,3 +284,31 @@ h2 {
     background-color: #888 !important;
     cursor: not-allowed;
 }
+
+#drop-zone {
+    position: relative; /* ¡Súper importante para que top y left no se escapen! */
+    overflow: hidden;   /* Evita que el logo se salga de la playera */
+    /* tu width, height, etc. */
+}
+
+.btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #25D366; /* Verde oficial de WhatsApp */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px; /* Separación del botón anterior */
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-whatsapp:hover {
+    background-color: #128C7E; /* Un verde más oscuro al pasar el mouse */
+}

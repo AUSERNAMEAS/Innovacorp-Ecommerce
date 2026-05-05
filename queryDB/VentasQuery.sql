@@ -119,6 +119,9 @@ ALTER TABLE producto DROP COLUMN activo;
 
 select id_producto,nombre,precio_unitario,imagen from producto
 
+select * from producto
+delete from producto where id_producto = 1013
+
 
 -- tallas --
 CREATE TABLE producto_talla (
@@ -193,6 +196,14 @@ estado_envio varchar(30)
 foreign key (id_pedido) references pedido(id_pedido)
 
 )
+
+SELECT TOP 5 
+id_pedido,fecha_pedido,estado_pedido
+    
+    
+FROM pedido
+WHERE fecha_pedido IS NOT NULL
+ORDER BY fecha_pedido DESC;
 
 select * from envio
 delete from envio

@@ -19,9 +19,9 @@ async function getPendingShipments() {
     const pool = await poolPromise;
 
     const result = await pool.request().query(`
-        SELECT COUNT(id_envio) AS pendingShipments
-        FROM envio
-        WHERE estado_envio = 'Pendiente de empaque'
+        SELECT COUNT(id_pedido) AS pendingShipments
+        FROM pedido
+        WHERE estado_pedido = 'Pendiente'
     `);
 
     return result.recordset[0].pendingShipments;
@@ -47,13 +47,13 @@ async function getRecentShipments() {
     const pool = await poolPromise;
 
     const result = await pool.request().query(`
-        SELECT TOP 5
-            CONVERT(VARCHAR(10), fecha_envio, 120) AS shipmentDate,
-            COUNT(id_envio) AS total
-        FROM envio
-        WHERE fecha_envio IS NOT NULL
-        GROUP BY fecha_envio
-        ORDER BY fecha_envio DESC
+        SELECT TOP 5 
+id_pedido,fecha_pedido,estado_pedido
+    
+    
+FROM pedido
+WHERE fecha_pedido IS NOT NULL
+ORDER BY fecha_pedido DESC;
     `);
 
     return result.recordset;
@@ -281,7 +281,7 @@ async function getfilteredOrders(email){
     .input('email', email)
     .query(`
         select id_pedido,pedido.id_cliente,FORMAT(fecha_pedido, 'yyyy-MM-dd') AS fecha_pedido, total, estado_pedido,detalle_string_pedido,correo from pedido
-INNER JOIN cliente ON pedido.id_cliente = cliente.id_cliente where correo = @email
+INNER JOIN cliente ON pedido.id_cliente = cliente.id_cliente where correo = @email and pedido.detalle_string_pedido IS NOT NULL
 `
 
 ) 

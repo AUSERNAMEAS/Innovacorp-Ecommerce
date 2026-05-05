@@ -181,3 +181,48 @@
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+.btn-ver-detalles {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    
+    /* Colores y Tipografía */
+    background-color: #2563eb; /* Azul moderno */
+    color: #ffffff !important;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    
+    /* Forma y Espaciado */
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    
+    /* Sombra y Animación */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-ver-detalles:hover {
+    background-color: #1d4ed8; /* Azul más oscuro */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px); /* Efecto de levante */
+}
+
+.btn-ver-detalles:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para el icono dentro del botón */
+.btn-ver-detalles svg {
+    transition: transform 0.3s ease;
+}
+
+.btn-ver-detalles:hover svg {
+    transform: scale(1.1);
+}

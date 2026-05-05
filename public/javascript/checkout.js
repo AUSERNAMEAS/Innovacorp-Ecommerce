@@ -67,7 +67,7 @@ console.log("Descripción del pedido:", descripcionPedido);
                 paypal_id: data.orderID
             };
 
-            try {
+         try{
                 const response = await fetch('http://localhost:3000/api/create-new-order', {
                     method: 'POST',
                     credentials: 'include',
@@ -76,16 +76,18 @@ console.log("Descripción del pedido:", descripcionPedido);
                 });
 
                 const result = await response.json();
+                window.focus(); // Asegura que la ventana vuelva a primer plano después del pago
 
                 if (result.success) {
                     console.log("Pedido creado con éxito:", result);
-                    await Swal.fire(
+                    Swal.fire(
                         '¡Pago Exitoso!',
                         'Tu pedido ha sido creado correctamente.',
                         'success'
-                    );
+                    ).then(() => {  
                     sessionStorage.removeItem('carritoTemporal');
                     window.location.href = '/html/FakeShop.html';
+                    });
                 } else {
                     await Swal.Fire(
                         'Error en la Order', result.message, 'error'
@@ -165,3 +167,8 @@ async function loadUserAccount()
     }
 
 }
+
+/**
+ * Renders the shopping cart items into the checkout view.
+ * It also updates the subtotal and total values.
+ */

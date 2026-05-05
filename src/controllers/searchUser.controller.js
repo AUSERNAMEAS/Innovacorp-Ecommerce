@@ -22,6 +22,11 @@ async function searchUser(req, res)
         }
         const passwordCompared = await bcrypt.compare(loginPassword,user.contrasenia_hash);
         // we check if the user is an Admin or a regular user and we redirect them to the corresponding page
+
+        if (!passwordCompared)
+        {
+            return res.json({ success: false, message: "Contraseña incorrecta" });
+        }
         if (passwordCompared && user.rol === 'cliente')
         {
             // now we save the user session

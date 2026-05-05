@@ -42,25 +42,45 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <div class="card full-width">
-                <h2>Calendario de Envíos Importantes</h2>
-                <p>Pedidos con fecha de entrega programada (próximos 5)</p>
-                <div class="calendar-placeholder">
-                    <p>📅 Próximos envíos/pedidos:</p>
-                    <ul>
-                        ${
-                          data.recentShipments.length > 0
-                            ? data.recentShipments
-                                .map(
-                                  (envio) =>
-                                    `<li>${envio.shipmentDate}: <strong>${envio.total}</strong> Pedido(s)</li>`,
-                                )
-                                .join("")
-                            : "<li>No hay envíos programados próximamente.</li>"
-                        }
-                    </ul>
+    <h2>Calendario de Envíos Importantes</h2>
+    <p>Ultimos 5 Pedidos</p>
+    
+    <div class="shipment-timeline">
+        ${
+            data.recentShipments.slice(0, 5).map((pedido) => {
+        // Convertimos la fecha del query
+        const fecha = new Date(pedido.fecha_pedido);
+        
+        // Lógica para marcar si es un pedido de días anteriores
+        const hoy = new Date();
+        hoy.setHours(0, 0, 0, 0);
+        const esAtrasado = fecha < hoy;
+
+        return `
+            <div class="calendar-event-card ${esAtrasado ? 'atrasado' : ''}">
+                <div class="event-date-badge">
+                    <span class="mth">${fecha.toLocaleString('es-MX', { month: 'short' }).toUpperCase()}</span>
+                    <span class="day">${fecha.getDate()}</span>
+                </div>
+                <div class="event-details">
+                    <div class="event-header">
+                        <strong>Pedido #${pedido.id_pedido}</strong>
+                        <span class="event-time">${pedido.estado_pedido}</span>
+                    </div>
+                    <p class="event-customer">Estado actual del registro</p>
+                    <div class="event-footer">
+                        <span class="event-total">Ref: ${pedido.id_pedido}</span>
+                    </div>
                 </div>
             </div>
         `;
+    }).join("")
+        }
+    </div>
+</div>
+        `;
+                                //<a href="ordersDetails.html?id=${pedido.id_pedido}" class="event-link">Ver Detalles</a>
+
     } catch (error) {
       console.error("Error al cargar el panel de administración:", error);
     }

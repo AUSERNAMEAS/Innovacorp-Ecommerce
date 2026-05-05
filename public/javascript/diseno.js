@@ -144,71 +144,61 @@ function addToCart(productId, talla) {
     renderCart();
 }
 
-function getFinalImage() {
-    // Create a canvas element (this will be our final image)
+async function getFinalImage() {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-
-    // Base image (t-shirt)
     const baseImg = new Image();
-
-    // The user design image (dragged image)
     const designImg = document.getElementById('drag-design');
 
-    // Return a promise because image loading is asynchronous
+    // Referencias HTML
+    const previewContainer = document.getElementById('preview-container');
+    const dropZone = document.getElementById('drop-zone');
+
     return new Promise((resolve) => {
         baseImg.onload = () => {
-            // Set canvas size equal to the t-shirt image
+            // 1. Configurar canvas al tamaño real del archivo (ej: 2000px)
             canvas.width = baseImg.width;
             canvas.height = baseImg.height;
 
-            // 1. Draw the base t-shirt image
+            // Dibujar playera
             ctx.drawImage(baseImg, 0, 0);
 
             if (designImg) {
-                // Get position of the dragged design relative to the drop zone
-                // Get DOM positions
-                const rect = designImg.getBoundingClientRect();
-                const parentRect = dropZone.getBoundingClientRect();
+                // 2. ESCALA REAL (Ancho Canvas / Ancho Visual de la playera)
+                const scale = canvas.width / previewContainer.offsetWidth;
 
-                // Calculate relative position inside drop zone
-                const x = rect.left - parentRect.left;
-                const y = rect.top - parentRect.top;
+                // 3. MEDIDAS VISUALES (Píxeles CSS en pantalla)
+                // Usamos offsetLeft/Top porque miden relativo al padre que tenga 'relative'.
+                // visualX/Y será la posición del diseño RELATIVA al drop-zone.
+                const visualX = designImg.offsetLeft; 
+                const visualY = designImg.offsetTop;
+                const visualWidth = designImg.offsetWidth;
+                const visualHeight = designImg.offsetHeight;
 
-                // 🔥 SCALE FACTORS (important)
-                const scaleX = canvas.width / parentRect.width;
-                const scaleY = canvas.height / parentRect.height;
+                // visualZoneX/Y es dónde empieza el cuadro punteado relativo a la playera completa.
+                const visualZoneX = dropZone.offsetLeft;
+                const visualZoneY = dropZone.offsetTop;
 
-                // Convert to canvas coordinates
-                const canvasX = x * scaleX;
-                const canvasY = y * scaleY;
+                // 4. POSICIÓN TOTAL VISUAL (Diseño + Zona) RELATIVA A LA PLAYERA
+                const totalVisualX = visualZoneX + visualX;
+                const totalVisualY = visualZoneY + visualY;
 
-                // Scale size too
-                const canvasWidth = designImg.width * scaleX;
-                const canvasHeight = designImg.height * scaleY;
+                // 5. TRADUCCIÓN A COORDENADAS DE CANVAS REALES
+                const finalX = totalVisualX * scale;
+                const finalY = totalVisualY * scale;
+                const drawWidth = visualWidth * scale;
+                const drawHeight = visualHeight * scale;
 
-                // Draw correctly positioned image
-                ctx.drawImage(
-                    designImg,
-                    canvasX,
-                    canvasY,
-                    canvasWidth,
-                    canvasHeight
-                );
+                // 6. DIBUJAR DEFINITIVO
+                ctx.drawImage(designImg, finalX, finalY, drawWidth, drawHeight);
             }
 
-            // 3. Convert the final canvas into a base64 image
-            const finalImage = canvas.toDataURL('image/png');
-
-            // Return the final combined image
-            resolve(finalImage);
+            resolve(canvas.toDataURL('image/png'));
         };
-
-        // ⚠️ Replace with your actual t-shirt image path
-        baseImg.src = "../img/logo/playeraBlanca.png";
+        
+        baseImg.src = "/img/logo/playeraBlanca.png"; // Ruta del archivo real
     });
 }
-
 /**
  * Lógica de ARRASTRAR Y SOLTAR (Drag & Drop) para personalización
  */
@@ -241,17 +231,29 @@ if (customImageInput) {
 
 if (dropZone) {
     dropZone.addEventListener('dragover', (e) => e.preventDefault());
+    
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
-        const data = e.dataTransfer.getData("text");
-        const img = document.getElementById(data);
-        if (!img) return;
-        img.style.position = 'absolute';
-        img.style.left = (e.offsetX - (img.clientWidth/2)) + 'px';
-        img.style.top = (e.offsetY - (img.clientHeight/2)) + 'px';
+    const data = e.dataTransfer.getData("text");
+    const img = document.getElementById(data);
+    if (!img) return;
+
+    // 1. Obtenemos las coordenadas del Drop Zone en la pantalla
+    const zoneRect = dropZone.getBoundingClientRect();
+
+    // 2. Calculamos dónde cayó el mouse respecto a la esquina del DROP ZONE
+    let exactX = e.clientX - zoneRect.left;
+    let exactY = e.clientY - zoneRect.top;
+
+    // 3. Posicionamiento ABSOLUTO dentro del Drop Zone
+    img.style.position = 'absolute';
+    
+    // Centramos el diseño en el cursor. Importante usar clientWidth/Height del diseño visual.
+    // Esto lo posiciona en píxeles CSS dentro del drop-zone.
+    img.style.left = (exactX - (img.clientWidth / 2)) + 'px';
+    img.style.top = (exactY - (img.clientHeight / 2)) + 'px';
     });
 }
-
 async function enviarSolicitud(e) {
     e.preventDefault();
     //here we get all the data from the form like usual lol
@@ -462,7 +464,17 @@ async function verifyUserSession() {
 }
 
 
-checkoutBtn.addEventListener('click', () => {
+checkoutBtn.addEventListener('click', async () => {
+    const result = await fetch('http://localhost:3000/api/main-page',{ credentials: "include" });
+    const sessionData = await result.json();
+    if(!sessionData.logged) {
+        Swal.fire({
+            icon: 'info',
+            title: 'Sesión no iniciada',
+            text: 'Por favor, inicia sesión para continuar con el proceso de compra.'
+        });
+        return;
+    }
     sessionStorage.setItem('carritoTemporal', JSON.stringify(cart));
     window.location.href = '../html/checkout.html';
 });
