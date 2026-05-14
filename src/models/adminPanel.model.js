@@ -232,7 +232,7 @@ async function deleteCustomRequestById(id) {
     const pool = await poolPromise; //
     await pool.request()
         .input('id', id)
-        .query('DELETE FROM solicitud_personalizacion WHERE id_solicitud = @id'); //
+        .query("UPDATE solicitud_personalizacion SET estado = 'Rechazada' WHERE id_solicitud = @id"); //
 }
 
 async function updateProductDetails(id, data) {

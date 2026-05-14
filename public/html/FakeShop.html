@@ -12,6 +12,12 @@
 
     <header>
     <img src="/img/logo/logo.jpg" alt="Logo Fake Shop" style="height:48px;vertical-align:middle;">
+
+    <div id="cart-icon" class="cart-btn">
+        <img src="../img/logo/cartImage.png" alt="Carrito" style="width: 30px;">
+        <span id="cart-count">0</span>
+    </div>
+
     <div class="userSession" style="margin-left:20px;"></div>
    </header>
 
@@ -20,8 +26,7 @@
         <a href="#about">Inicio</a>
         <a href="#products">Productos Ya Hechos</a>
         <a href="#custom">Personaliza el Tuyo</a>
-        <a href="#cart">Carrito de Compras</a>
-    </nav>
+        </nav>
 
     <div class="container">
 
@@ -85,6 +90,7 @@
 </section>
 
         <section id="cart">
+            <button id="close-cart" class="close-btn">&times;</button>
             <h2>Carrito de Compras</h2>
             <div id="cart-items">
                 <p>Tu carrito está vacío.</p>
@@ -96,6 +102,8 @@
             </div>
             <button id="checkout-btn">Finalizar Compra</button>
         </section>
+
+        <div id="cart-overlay"></div>
 
     </div>
 
@@ -120,7 +128,6 @@
             <h3>Enlaces</h3>
             <a href="#about">Inicio</a>
             <a href="#products">Productos</a>
-            <a href="#cart">Carrito</a>
   
         </div>
 

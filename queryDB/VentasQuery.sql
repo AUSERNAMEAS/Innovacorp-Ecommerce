@@ -197,6 +197,8 @@ foreign key (id_pedido) references pedido(id_pedido)
 
 )
 
+alter table envio alter column direccion_envio char(100)
+
 SELECT TOP 5 
 id_pedido,fecha_pedido,estado_pedido
     

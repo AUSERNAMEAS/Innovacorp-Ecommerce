@@ -230,7 +230,12 @@ window.deleteOrder = deleteOrder; // to be able to use it globally in the html
           </li>
           `;
 
-        } else {
+        } 
+        else if(solicitud.estado === "Rechazada"){
+          return ``; // no se muestra en la lista
+        }
+        
+        else {
 
           return `
           <li
@@ -378,7 +383,7 @@ async function deleteCustomRequest(id) {
 
     try {
         const response = await fetch(`http://localhost:3000/api/admin-panel/delete-custom-request/${id}`, {
-            method: 'DELETE'
+            method: 'PUT'
         }); //
 
         const result = await response.json(); //

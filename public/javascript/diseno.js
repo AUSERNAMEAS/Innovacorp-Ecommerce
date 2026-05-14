@@ -10,6 +10,10 @@ const cartSubtotalSpan = document.getElementById('cart-subtotal');
 const cartShippingSpan = document.getElementById('cart-shipping');
 const cartTotalSpan = document.getElementById('cart-total');
 const checkoutBtn = document.getElementById('checkout-btn');
+const cartPanel = document.getElementById('cart'); // El <section id="cart">
+const cartIcon = document.getElementById('cart-icon'); 
+const closeCartBtn = document.getElementById('close-cart');
+const cartCountSpan = document.getElementById('cart-count'); // El span dentro del ícono del carrito
 
 let cart = [];
 let productsShown = 3;
@@ -37,8 +41,8 @@ function renderProducts(filteredProducts = allProducts) {
             productCard.className = 'product-card';
             productCard.onclick = () => goToProduct(product.id_producto);
 
-            // 2. Apply css if the product is inactive
-        if (isInactive) {
+            // 2. Apply css if the product is inactive or the stock is 0
+        if (isInactive || product.stock === 0   ) {
             productCard.classList.add('is-disabled');
         }
 
@@ -337,12 +341,14 @@ function renderCart() {
         cartShippingSpan.textContent = '$0.00 MXN';
         cartTotalSpan.textContent = '$0.00 MXN';
         checkoutBtn.style.display = 'none';
+        if (cartCountSpan) cartCountSpan.textContent = '0'; 
         return;
     }
 
     checkoutBtn.style.display = 'block';
 
     let subtotal = 0;
+    let totalItems = 0;
     cartItemsDiv.innerHTML = '';
     //itll make a new div for each element in the cart,
     cart.forEach(item => {
@@ -361,15 +367,21 @@ function renderCart() {
         `;
         cartItemsDiv.appendChild(itemDiv);
         subtotal += item.precio_unitario * item.quantity;
+        totalItems += item.quantity;
     });
+
+    // Update the cart count
+    if (cartCountSpan) {
+        cartCountSpan.textContent = totalItems;
+    }
 
     // if theres no product in the cart shipping is 0
     let shipping;
-    if(subtotal>0){
-        shipping= 80;
+    if(subtotal>=599){
+        shipping= 0;
     }
     else{
-        shipping = 0;
+        shipping = 99;
     }
 
     const total = subtotal + shipping;
@@ -377,6 +389,20 @@ function renderCart() {
     cartSubtotalSpan.textContent = `$${subtotal.toFixed(2)} MXN`;
     cartShippingSpan.textContent = `$${shipping.toFixed(2)} MXN`;
     cartTotalSpan.textContent = `$${total.toFixed(2)} MXN`;
+}
+
+// Abrir el carrito
+if (cartIcon) {
+    cartIcon.onclick = () => {
+        cartPanel.classList.add('active');
+    };
+}
+
+// Cerrar el carrito
+if (closeCartBtn) {
+    closeCartBtn.onclick = () => {
+        cartPanel.classList.remove('active');
+    };
 }
 
 //add an item to the cart if it already exists just increases the quantity

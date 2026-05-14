@@ -125,7 +125,7 @@ async function insertShippingDetails(transaction, idOrder, data)
         }
 
         const request = new sql.Request(transaction);
-        const shipppingAddress = `${data.datos_envio.direccion}, ${data.datos_envio.ciudad}`;
+        const shipppingAddress = `${data.datos_envio.direccion}, ${data.datos_envio.estado}`;
         const pool = await poolPromise;
         const result = await request.
         input('id_pedido', idOrder).

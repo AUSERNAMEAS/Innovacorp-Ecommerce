@@ -53,7 +53,7 @@ async function loadUserAccount()
                 
                 <div style="margin-top: 15px;">
                     <label for="inputNewPhone" style="display: block; margin-bottom: 5px;"><strong>Teléfono:</strong></label>
-                    <input type="tel" id="inputNewPhone" value="${result.telefono !== 'No registrado' ? result.telefono : ''}" placeholder="Ej: 8182838485" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                    <input type="tel" id="inputNewPhone" value="${result.telefono !== 'No registrado' ? result.telefono : ''}" placeholder="Ej: 8182838485" style="width: 100%; padding: 10px 10px 10px 52px; border-radius: 5px; border: 1px solid #ccc;">
                 </div>
                 
                 <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
@@ -70,6 +70,8 @@ async function loadUserAccount()
                 closeEditModal();
             }
         }
+
+        activateNumberLibrary();
 
     }
     catch (error)
@@ -126,9 +128,17 @@ async function saveNewPhone() {
         if (data.success) {
             document.getElementById('displayPhone').innerText = newPhone;
             closeEditModal(); // Cerramos el modal automáticamente al tener éxito
-            alert("Teléfono actualizado correctamente");
+            Swal.fire({
+                icon: 'success',
+                title: 'Teléfono actualizado',
+                text: 'El teléfono ha sido actualizado correctamente.'
+            });
         } else {
-            alert("Error al actualizar: " + data.message);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al actualizar',
+                text: data.message || 'Hubo un error al actualizar el teléfono.'
+            });
         }
     } catch (error) {
         console.error('Error actualizando teléfono:', error);
@@ -257,3 +267,11 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = '../html/FakeShop.html';
         })
 });
+
+function activateNumberLibrary() {
+    const phoneInputField = document.querySelector("#inputNewPhone");
+const phoneInput = window.intlTelInput(phoneInputField, {
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    preferredCountries: ["mx", "us", "co"], // Países que salen al principio
+});
+}

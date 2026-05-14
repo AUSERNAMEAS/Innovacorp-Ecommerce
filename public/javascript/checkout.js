@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     loadUserAccount();
+    activateNumberLibrary();
     //checkout.js
     const cardOption = document.getElementById('card-option');
     const cardDetails = document.getElementById('card-details');
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Obtener carrito guardado
     const carritoString = sessionStorage.getItem('carritoTemporal');
     const carrito = JSON.parse(carritoString || '[]');
-    //console.log("Carrito cargado:", carrito);
+    console.log("Carrito cargado:", carrito);
     const descripcionPedido = carrito.map(item => {
     // Si tiene talla la ponemos, si no, lo dejamos normal
     const detalleTalla = item.talla ? ` (Talla: ${item.talla})` : '';
@@ -21,6 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
 }).join(', ');
 
 console.log("Descripción del pedido:", descripcionPedido);
+    renderOrderSummary(carrito);
+
 
 
     
@@ -122,6 +125,45 @@ console.log("Descripción del pedido:", descripcionPedido);
 
 });
 
+function renderOrderSummary(carrito) {
+    const cartContainer = document.getElementById('cart-items-container');
+    const totalContainer = document.getElementById('cart-total');
+    
+    if (carrito.length === 0) {
+        cartContainer.innerHTML = '<p>Tu carrito está vacío</p>';
+        return;
+    }
+
+    let total = 0;
+    cartContainer.innerHTML = ''; // Limpiar contenedor
+
+    carrito.forEach(product => {
+        const subtotal = product.precio_unitario * product.quantity;
+        total += subtotal;
+        if(total >= 599){
+            total += 0;
+        }else{
+            total += 99;
+        }
+
+        // Crear el HTML para cada producto
+        const productHTML = `
+            <div class="item-summary" style="display: flex; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                <img src="../${product.imagen}" alt="${product.nombre}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px; margin-right: 15px;">
+                <div style="flex: 1;">
+                    <h4 style="margin: 0; font-size: 0.9em;">${product.nombre}</h4>
+                    <p style="margin: 2px 0; color: #666; font-size: 0.8em;">Cant: ${product.quantity} | Talla: ${product.talla || 'N/A'}</p>
+                    <p style="margin: 0; font-weight: bold;">$${product.precio_unitario} MXN</p>
+                </div>
+            </div>
+        `;
+        cartContainer.innerHTML += productHTML;
+    });
+
+    totalContainer.innerHTML = `Total a pagar: $${total.toFixed(2)} MXN`;
+}
+
+
 // this should be on a utils folder ngl
 
 function calculateTotal(carrito) {
@@ -142,7 +184,7 @@ function getShippingData() {
         nombre: document.getElementById('name').value,
         apellido: document.getElementById('lastname').value,
         direccion: document.getElementById('address').value,
-        ciudad: document.getElementById('city').value,
+        estado: document.getElementById('state').value,
         telefono: document.getElementById('phone').value
     };
 }
@@ -172,3 +214,10 @@ async function loadUserAccount()
  * Renders the shopping cart items into the checkout view.
  * It also updates the subtotal and total values.
  */
+function activateNumberLibrary() {
+    const phoneInputField = document.querySelector("#phone");
+const phoneInput = window.intlTelInput(phoneInputField, {
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    preferredCountries: ["mx", "us", "co"], // Países que salen al principio
+});
+}

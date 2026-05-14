@@ -144,7 +144,7 @@ async function deleteCustomRequestController(req, res) {
     try {
         const { id } = req.params; //
         await deleteCustomRequestById(id); //
-        res.json({ success: true, message: "Solicitud eliminada correctamente" }); //
+        res.json({ success: true, message: "Solicitud rechazada y eliminada correctamente" }); //
     } catch (error) {
         res.status(500).json({ success: false, message: error.message }); //
     }

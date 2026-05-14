@@ -13,7 +13,7 @@ router.put('/update-stock', verifySessionFunction,verifyAdminFunction, updateSto
 router.put('/accept-custom-order/:id_request', verifySessionFunction,verifyAdminFunction,acceptCustomOrder);
 router.put('/update-order-status', verifySessionFunction,verifyAdminFunction,updateOrderStatusController);
 router.delete('/delete-order/:id', verifySessionFunction,verifyAdminFunction, deleteOrderController);
-router.delete('/delete-custom-request/:id', verifySessionFunction,verifyAdminFunction, deleteCustomRequestController);
+router.put('/delete-custom-request/:id', verifySessionFunction,verifyAdminFunction, deleteCustomRequestController);
 router.put('/update-product/:id', verifySessionFunction,verifyAdminFunction, updateProduct);
 router.put('/delete-product/:id', verifySessionFunction,verifyAdminFunction, deleteProduct);
 router.put('/reactivate-product/:id', verifySessionFunction,verifyAdminFunction, reactivateProduct); 
