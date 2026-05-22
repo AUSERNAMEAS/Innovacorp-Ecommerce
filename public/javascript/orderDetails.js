@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         const response = await fetch(`/api/user-page/order-info/${orderId}`);
         const result = await response.json();
-        console.log("Datos del pedido:", result);
+        //console.log("Datos del pedido:", result);
 
         if (result.success) {
             renderOrderDetails(result.data);
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             alert("No se pudo cargar el pedido.");
         }
     } catch (error) {
-        console.error("Error cargando detalles:", error);
+        //console.error("Error cargando detalles:", error);
     }
 });
 

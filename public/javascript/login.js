@@ -19,6 +19,7 @@ document.getElementById('register-form').addEventListener('submit', async functi
             'Por seguridad, la contraseña debe tener al menos 8 caracteres.',
             'error'
         );
+        //console.log('Contraseña muy corta');
         return; // El 'return' cancela todo y el formulario NO se envía
     }
 
@@ -73,7 +74,7 @@ document.getElementById('register-form').addEventListener('submit', async functi
         }
 
     } catch (error) {
-        console.error("Error de conexión:", error);
+        //console.error("Error de conexión:", error);
         await Swal.fire(
             'Error de Conexión',
             'Ocurrió un error al conectar con el servidor.',
@@ -96,7 +97,7 @@ document.getElementById('login-form').addEventListener('submit', async function(
     });
 
     const result = await response.json();
-    console.log("Respuesta del servidor:", result);
+    //console.log("Respuesta del servidor:", result);
     if (!result.success) 
         {
         await Swal.fire(

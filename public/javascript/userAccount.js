@@ -6,7 +6,7 @@ async function loadUserAccount()
         //we gonna fetch the session to use to build the cointainer
         const response = await fetch('/api/user-page/basic-info');
         const result = await response.json();
-        console.log('User basic info:', result);
+        //console.log('User basic info:', result);
         const containerDataUser=document.querySelector('.container');
 
         // we gonna add the user data to the container
@@ -173,7 +173,7 @@ async function loadOrders()
             </div>
             `;
         }
-    console.log('User orders data:', result);
+    //console.log('User orders data:', result);
 
 }
 

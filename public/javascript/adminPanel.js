@@ -118,7 +118,7 @@ window.deleteOrder = deleteOrder; // to be able to use it globally in the html
         headers: { 'Accept': 'application/json' } 
     });
     const result = await response.json();
-    console.log(result);
+    //console.log(result);
 
     if (!result.success) return;
 
@@ -593,7 +593,7 @@ loadPage();
           `/api/admin-panel/customImage/get-image/${id}`,
         );
         const result = await response.json();
-        console.log(result);
+        //console.log(result);
 
         if (!result.success) {
           await Swal.fire('Error', "No se pudo cargar la imagen", 'error');
@@ -631,7 +631,7 @@ loadPage();
   document.getElementById("approveBtn").addEventListener("click", async function () {
 
   const requestId = this.getAttribute("data-id");
-  console.log("Aprobar solicitud con ID:", requestId);
+  //console.log("Aprobar solicitud con ID:", requestId);
   // we sent this to updat the status order to accepted
   try{
     const response = await fetch(`/api/admin-panel/accept-custom-order/${requestId}`, {
@@ -643,7 +643,7 @@ loadPage();
       });
 
       const result = await response.json();
-      console.log(result);
+      //console.log(result);
   }
   catch(error){
     console.error("Error al aprobar la solicitud:", error);

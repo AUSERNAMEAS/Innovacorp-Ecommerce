@@ -15,7 +15,7 @@ async function loadProduct(){
 
     }
     catch (error){
-        console.error('Error fetching product data:', error);
+        //console.error('Error fetching product data:', error);
     }
 
     let detailsTypeProduct = "";

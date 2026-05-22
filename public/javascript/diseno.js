@@ -278,13 +278,13 @@ async function enviarSolicitud(e) {
         imageFileName: imageFileName,
         imageBase64: finalImage
     };
-    console.log('Request Data:', requestData);
+    //console.log('Request Data:', requestData);
 
     personalizedBtn.textContent = 'Enviando...';
     personalizedBtn.disabled = true;
 
     try {
-        
+        //console.log('Sending request with data:', requestData);
         const response = await fetch('/api/custom-requests', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -307,7 +307,7 @@ async function enviarSolicitud(e) {
         }  
         catch (error) 
         {
-            console.log(error)
+            //console.log(error)
         } 
         finally 
         {
@@ -320,10 +320,10 @@ async function fetchProducts(){
     try {
         const response = await fetch('/api/products');
         allProducts = await response.json();
-        console.log("RAW RESPONSE:", allProducts);
+        //console.log("RAW RESPONSE:", allProducts);
         renderProducts();
     } catch (error) {
-        console.error('Error al cargar productos:', error);
+        //console.error('Error al cargar productos:', error);
     }
 }
 
@@ -352,7 +352,7 @@ function renderCart() {
     cartItemsDiv.innerHTML = '';
     //itll make a new div for each element in the cart,
     cart.forEach(item => {
-        console.log('Renderizando item del carrito:', item);
+        //console.log('Renderizando item del carrito:', item);
         const itemDiv = document.createElement('div');
         itemDiv.className = 'cart-item';
         itemDiv.innerHTML = `
@@ -408,7 +408,7 @@ if (closeCartBtn) {
 //add an item to the cart if it already exists just increases the quantity
 function increaseQuantity(productId) {
     const item = cart.find(arrayProduct => arrayProduct.id_producto === productId);
-    console.log('Producto a aumentar cantidad:', item);
+    //console.log('Producto a aumentar cantidad:', item);
     if(item.quantity < item.stock) 
     {
     
@@ -446,7 +446,7 @@ async function verifyUserSession() {
     const userSessionDiv = document.querySelector('.userSession');
     const response = await fetch('/api/main-page',{ credentials: "include" });
     const result = await response.json();
-    console.log('User session verification result:', result);
+    //console.log('User session verification result:', result);
     //if the user is logged in we show his email and a logout link
     if(result.logged) 
     {

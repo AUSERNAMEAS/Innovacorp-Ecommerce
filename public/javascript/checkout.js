@@ -14,14 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Obtener carrito guardado
     const carritoString = sessionStorage.getItem('carritoTemporal');
     const carrito = JSON.parse(carritoString || '[]');
-    console.log("Carrito cargado:", carrito);
+    //console.log("Carrito cargado:", carrito);
     const descripcionPedido = carrito.map(item => {
     // Si tiene talla la ponemos, si no, lo dejamos normal
     const detalleTalla = item.talla ? ` (Talla: ${item.talla})` : '';
     return `${item.quantity}x ${item.nombre}${detalleTalla}`;
 }).join(', ');
 
-console.log("Descripción del pedido:", descripcionPedido);
+//console.log("Descripción del pedido:", descripcionPedido);
     renderOrderSummary(carrito);
 
 
@@ -55,7 +55,7 @@ console.log("Descripción del pedido:", descripcionPedido);
             /*
             const details = await actions.order.capture();
             console.log("Pago aprobado:", details);*/
-            console.log("Pago aprobado por usuario. ID de PayPal:", data.orderID);
+            //console.log("Pago aprobado por usuario. ID de PayPal:", data.orderID);
 
             const datosEnvio = getShippingData();
             const { totalPagar, costoEnvio } = calculateTotal(carrito);
@@ -82,7 +82,7 @@ console.log("Descripción del pedido:", descripcionPedido);
                 window.focus(); // Asegura que la ventana vuelva a primer plano después del pago
 
                 if (result.success) {
-                    console.log("Pedido creado con éxito:", result);
+                    //("Pedido creado con éxito:", result);
                     Swal.fire(
                         '¡Pago Exitoso!',
                         'Tu pedido ha sido creado correctamente.',
@@ -109,7 +109,7 @@ console.log("Descripción del pedido:", descripcionPedido);
             await Swal.fire(
                 'Pago Cancelado', 'Has cancelado el proceso de pago.', 'info'
             );
-            console.log("Pago cancelado por el usuario.");
+            //console.log("Pago cancelado por el usuario.");
         },
 
         onError: async function (err) {
@@ -199,7 +199,7 @@ async function loadUserAccount()
         //we gonna fetch the session to use to build the cointainer
         const response = await fetch('/api/main-page');
         const result = await response.json();
-        console.log('User account data:', result);
+        //  console.log('User account data:', result);
         
 
     }
