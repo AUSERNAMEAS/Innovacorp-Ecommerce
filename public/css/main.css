@@ -1,3 +1,4 @@
+/* --- GLOBAL STYLES --- */
 body {
     font-family: sans-serif;
     margin: 0;
@@ -5,6 +6,8 @@ body {
     background-color: #f0f0f5;
     color: #333;
 }
+
+/* --- HEADER & NAVIGATION --- */
 header {
     background-color: #6a0dad; /* Morado oscuro */
     color: white;
@@ -12,22 +15,30 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-   /* height: 45px; /* altura fija pequeña */
 }
 
+/* New wrapper to push cart and user session to the far right together */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between the cart icon and user session buttons */
+}
 
 header h1 {
-    margin: 0; /* Elimina el margen por defecto del h1 */
-    font-size: 2.5rem; /* Tamaño grande para el título */
+    margin: 0; 
+    font-size: 2.5rem; 
 }
+
 header p {
     margin: 0;
 }
+
 nav {
     background-color: #8a2be2; /* Morado */
     padding: 0.5rem;
     text-align: center;
 }
+
 nav a {
     color: white;
     text-decoration: none;
@@ -35,14 +46,18 @@ nav a {
     margin: 0 0.5rem;
     font-weight: bold;
 }
+
 nav a:hover {
     background-color: #9370db; /* Morado claro */
 }
+
+/* --- MAIN LAYOUT & SECTIONS --- */
 .container {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 1rem;
 }
+
 section {
     background-color: white;
     padding: 2rem;
@@ -50,29 +65,40 @@ section {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 h2 {
     color: #6a0dad;
     border-bottom: 2px solid #6a0dad;
     padding-bottom: 0.5rem;
 }
+
+/* --- PRODUCT GRID & CARDS --- */
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
 }
+
 .product-card {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 1rem;
     text-align: center;
     background-color: #f8f8ff; /* Blanco azulado */
-    cursor: pointer; /* hace evidente que se puede clickear */
+    cursor: pointer; 
     transition: transform 0.2s, box-shadow 0.2s;
 }
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
 .product-card img {
     max-width: 100%;
     border-radius: 8px;
 }
+
 .product-card button {
     background-color: #8a2be2;
     color: white;
@@ -82,14 +108,46 @@ h2 {
     cursor: pointer;
     margin-top: 0.5rem;
 }
+
 .product-card button:hover {
     background-color: #9370db;
 }
+
+/* Disabled/Unavailable Product Card State */
+.product-card.is-disabled {
+    filter: grayscale(100%); 
+    opacity: 0.7;
+    position: relative;
+    pointer-events: none; /* Blocks clicks */
+    user-select: none;
+}
+
+.badge-unavailable {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    background-color: rgba(255, 0, 0, 0.7);
+    color: white;
+    padding: 5px 15px;
+    font-weight: bold;
+    border: 2px solid white;
+    z-index: 10;
+    text-transform: uppercase;
+}
+
+.product-card.is-disabled .btn-add-cart {
+    background-color: #888 !important;
+    cursor: not-allowed;
+}
+
+/* --- CUSTOM FORM ELEMENTS --- */
 .custom-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
+
 .custom-form input[type="file"],
 .custom-form input[type="text"],
 .custom-form textarea {
@@ -97,6 +155,7 @@ h2 {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 .custom-form button {
     background-color: #ff69b4; /* Rosa */
     color: white;
@@ -106,68 +165,31 @@ h2 {
     cursor: pointer;
     font-size: 1rem;
 }
+
 .custom-form button:hover {
-    background-color: #ffb6c1; /* Rosa claro */
+    background-color: #ffb6c1; 
 }
-.cart-item {
+
+/* --- USER ACCOUNT STYLES --- */
+.account-card {
+    background: white;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.orders-list {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-    padding: 0.5rem 0;
+    flex-direction: column;
+    gap: 1rem;
 }
-.cart-item button {
-    background-color: #dc3545; /* Rojo */
-    color: white;
-    border: none;
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
-    cursor: pointer;
-}
-.cart-item button:hover {
-    background-color: #c82333;
-}
-.cart-quantity {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-.cart-quantity button {
-    background-color: #007bff;
-    color: white;
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-}
-.cart-quantity button:hover {
-    background-color: #0056b3;
-}
-.cart-details {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 2px solid #eee;
-}
-.cart-details p {
-    display: flex;
-    justify-content: space-between;
-}
-#load-more-btn, #checkout-btn {
-    background-color: #5bc0de; /* Azul claro */
-    color: white;
-    border: none;
+
+.order-item {
+    border: 1px solid #ccc;
     padding: 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 1rem;
-    display: block;
-    width: 100%;
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-#load-more-btn:hover, #checkout-btn:hover {
-    background-color: #46b8da;
+    border-radius: 6px;
+    background-color: #f8f8ff;
 }
 
 .btn-iniciarSesion {
@@ -184,7 +206,191 @@ h2 {
 .btn-iniciarSesion:hover {
     background-color: #ffb6c1; 
 }
-/* Estilos para el pie de página */
+
+/* --- SIDE SLIDE-OUT CART MECHANICS --- */
+#cart {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 380px;
+    height: 100vh;
+    background-color: #fff;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+    z-index: 1001; 
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    
+    /* Initial state: Hidden off-screen right */
+    transform: translateX(100%);
+    transition: transform 0.4s ease-in-out;
+}
+
+#cart.active {
+    transform: translateX(0);
+}
+
+#cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 1000;
+}
+
+#cart-overlay.active {
+    display: block;
+}
+
+/* --- CART CONTENT AND ELEMENTS --- */
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.cart-item button {
+    background-color: #dc3545; /* Rojo */
+    color: white;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cart-item button:hover {
+    background-color: #c82333;
+}
+
+.cart-quantity {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cart-quantity button {
+    background-color: #007bff;
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+.cart-quantity button:hover {
+    background-color: #0056b3;
+}
+
+.cart-details {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid #eee;
+}
+
+.cart-details p {
+    display: flex;
+    justify-content: space-between;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-size: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* --- HEADER CART ICON TRIGGER --- */
+#cart-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#cart-icon:hover {
+    transform: scale(1.1);
+}
+
+#cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: #ff4747;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 2px 6px;
+    min-width: 15px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* --- ACTION BUTTONS & WIDGETS --- */
+#load-more-btn, #checkout-btn {
+    background-color: #5bc0de; /* Azul claro */
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#load-more-btn:hover, #checkout-btn:hover {
+    background-color: #46b8da;
+}
+
+#drop-zone {
+    position: relative; 
+    overflow: hidden;   /* Keeps design inside shirt bounds */
+}
+
+.btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #25D366; /* Verde oficial de WhatsApp */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px; 
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-whatsapp:hover {
+    background-color: #128C7E; 
+}
+
+/* --- FOOTER --- */
 .footer {
     background-color: #6a0dad;
     color: white;
@@ -223,189 +429,3 @@ h2 {
     padding: 0.7rem;
     font-size: 0.9rem;
 }
-
-/* Estilos específicos para la página de cuenta de usuario */
-
-
-.account-card {
-    background: white;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.orders-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.order-item {
-    border: 1px solid #ccc;
-    padding: 1rem;
-    border-radius: 6px;
-    background-color: #f8f8ff;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
-}
-
-/* public/css/main.css */
-
-/* Estado general de la card desactivada */
-.product-card.is-disabled {
-    filter: grayscale(100%); /* Todo gris */
-    opacity: 0.7;
-    position: relative;
-    pointer-events: none; /* Bloquea clics en toda la tarjeta */
-    user-select: none;
-}
-
-/* Letrero de "No disponible" sobre la imagen */
-.badge-unavailable {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(-15deg);
-    background-color: rgba(255, 0, 0, 0.7);
-    color: white;
-    padding: 5px 15px;
-    font-weight: bold;
-    border: 2px solid white;
-    z-index: 10;
-    text-transform: uppercase;
-}
-
-/* Estilo específico para el botón deshabilitado */
-.product-card.is-disabled .btn-add-cart {
-    background-color: #888 !important;
-    cursor: not-allowed;
-}
-
-#drop-zone {
-    position: relative; /* ¡Súper importante para que top y left no se escapen! */
-    overflow: hidden;   /* Evita que el logo se salga de la playera */
-    /* tu width, height, etc. */
-}
-
-.btn-whatsapp {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background-color: #25D366; /* Verde oficial de WhatsApp */
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 15px; /* Separación del botón anterior */
-    transition: background-color 0.3s ease;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-}
-
-.btn-whatsapp:hover {
-    background-color: #128C7E; /* Un verde más oscuro al pasar el mouse */
-}
-
-/* Contenedor principal del carrito */
-#cart {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 380px;
-    height: 100vh;
-    background-color: #fff;
-    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
-    z-index: 1001; /* Por encima del overlay */
-    padding: 30px 20px;
-    display: flex;
-    flex-direction: column;
-    
-    /* Estado inicial: oculto a la derecha */
-    transform: translateX(100%);
-    transition: transform 0.4s ease-in-out;
-}
-
-/* Clase que activa la visibilidad */
-#cart.active {
-    transform: translateX(0);
-}
-
-/* Fondo oscurecido */
-#cart-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    z-index: 1000;
-}
-
-#cart-overlay.active {
-    display: block;
-}
-
-/* Elementos dentro del carrito */
-.cart-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.cart-item img {
-    width: 70px;
-    height: 70px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.close-btn {
-    position: absolute;
-    top: 10px;
-    left: 15px;
-    font-size: 30px;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-/* Estilo del contenedor del icono */
-#cart-icon {
-    position: relative;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    /* Esto asegura que esté a la izquierda del último botón si lo pones antes en el HTML */
-}
-
-#cart-icon:hover {
-    transform: scale(1.1);
-}
-
-/* El contador (la burbuja roja) */
-#cart-count {
-    position: absolute;
-    top: -8px;
-    right: -10px;
-    background-color: #ff4747;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    border-radius: 50%;
-    padding: 2px 6px;
-    min-width: 15px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-

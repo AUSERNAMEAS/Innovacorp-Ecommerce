@@ -285,7 +285,7 @@ async function enviarSolicitud(e) {
 
     try {
         
-        const response = await fetch('http://localhost:3000/api/custom-requests', {
+        const response = await fetch('/api/custom-requests', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(requestData)
@@ -318,7 +318,7 @@ async function enviarSolicitud(e) {
 
 async function fetchProducts(){
     try {
-        const response = await fetch('http://localhost:3000/api/products');
+        const response = await fetch('/api/products');
         allProducts = await response.json();
         console.log("RAW RESPONSE:", allProducts);
         renderProducts();
@@ -444,7 +444,7 @@ async function verifyUserSession() {
     // we select the span where we will show the user session info and 
     // we make a fetch request to the main page route to verify if the user session exists
     const userSessionDiv = document.querySelector('.userSession');
-    const response = await fetch('http://localhost:3000/api/main-page',{ credentials: "include" });
+    const response = await fetch('/api/main-page',{ credentials: "include" });
     const result = await response.json();
     console.log('User session verification result:', result);
     //if the user is logged in we show his email and a logout link
@@ -467,7 +467,7 @@ async function verifyUserSession() {
         const logoutBtn = document.getElementById('btnLogout');
 
         logoutBtn.addEventListener('click', () => {
-            window.location.href = 'http://localhost:3000/api/delete-user-session';
+            window.location.href = '/api/delete-user-session';
         })
 
         //<a href="/html/Useraccount.html" class="btnCheckYourAccount">Mi cuenta</a>
@@ -491,7 +491,7 @@ async function verifyUserSession() {
 
 
 checkoutBtn.addEventListener('click', async () => {
-    const result = await fetch('http://localhost:3000/api/main-page',{ credentials: "include" });
+    const result = await fetch('/api/main-page',{ credentials: "include" });
     const sessionData = await result.json();
     if(!sessionData.logged) {
         Swal.fire({
@@ -533,6 +533,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //alert('su solicitud ha sido enviada');
         enviarSolicitud(event);
     })
+
     verifyUserSession();
 
     // this is the button we added to the user account page to log out

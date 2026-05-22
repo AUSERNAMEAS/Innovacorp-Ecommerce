@@ -71,7 +71,7 @@ console.log("Descripción del pedido:", descripcionPedido);
             };
 
          try{
-                const response = await fetch('http://localhost:3000/api/create-new-order', {
+                const response = await fetch('/api/create-new-order', {
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
@@ -197,7 +197,7 @@ async function loadUserAccount()
     try
     {
         //we gonna fetch the session to use to build the cointainer
-        const response = await fetch('http://localhost:3000/api/main-page');
+        const response = await fetch('/api/main-page');
         const result = await response.json();
         console.log('User account data:', result);
         

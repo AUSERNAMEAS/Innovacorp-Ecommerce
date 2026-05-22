@@ -4,7 +4,7 @@ async function loadUserAccount()
     try
     {
         //we gonna fetch the session to use to build the cointainer
-        const response = await fetch('http://localhost:3000/api/user-page/basic-info');
+        const response = await fetch('/api/user-page/basic-info');
         const result = await response.json();
         console.log('User basic info:', result);
         const containerDataUser=document.querySelector('.container');
@@ -117,7 +117,7 @@ async function saveNewPhone() {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/api/user-page/update-phone', {
+        const response = await fetch('/api/user-page/update-phone', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ telefono: newPhone })
@@ -148,7 +148,7 @@ async function saveNewPhone() {
 async function loadOrders()
 {
     //we fetch the orders of the user to load them in html
-    const response = await fetch('http://localhost:3000/api/user-page', {
+    const response = await fetch('/api/user-page', {
     method: 'GET',
     credentials: 'include' // sent cookies with the request
   });
@@ -193,7 +193,7 @@ async function showImageCustomRequest(id_solicitud)
 
 async function loadCustomRequests() {
     try {
-        const response = await fetch('http://localhost:3000/api/user-page/custom-requests', {
+        const response = await fetch('/api/user-page/custom-requests', {
             method: 'GET',
             credentials: 'include'
         });

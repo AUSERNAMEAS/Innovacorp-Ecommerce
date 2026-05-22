@@ -7,7 +7,7 @@ async function loadProduct(){
     // we fetch the product with id and set the data in the html
     try
     {
-        const response = await fetch(`http://localhost:3000/api/products/${productId}`);
+        const response = await fetch(`/api/products/${productId}`);
 
         const product = await response.json();
         currentProduct = product;

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // 2. Traer los datos desde tu endpoint Node.js (El que usa la nueva consulta SQL)
     try {
-        const response = await fetch(`http://localhost:3000/api/user-page/order-info/${orderId}`);
+        const response = await fetch(`/api/user-page/order-info/${orderId}`);
         const result = await response.json();
         console.log("Datos del pedido:", result);
 

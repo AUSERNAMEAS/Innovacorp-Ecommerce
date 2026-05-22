@@ -1,5 +1,5 @@
 const app = require('./app');
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 //routes
 
 //route to get products
@@ -50,6 +50,7 @@ app.use('/api/admin-panel', adminPanelRoutes);
 // route to handle google auth
 const googleAuthRoutes = require('./routes/googleAut');
 app.use('/auth/google', googleAuthRoutes);
+
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);

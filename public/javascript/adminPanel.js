@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loadDashboard() {
     try {
-      const response = await fetch("http://localhost:3000/api/admin-panel");
+      const response = await fetch("/api/admin-panel");
       const result = await response.json();
         if (!result.success) {
             console.error("Error en la API:", result.message);
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     if(!confirmacion.isConfirmed) return;
     try {
-        const res = await fetch(`http://localhost:3000/api/admin-panel/delete-order/${id}`, { method: 'DELETE' });
+        const res = await fetch(`/api/admin-panel/delete-order/${id}`, { method: 'DELETE' });
         const result = await res.json();
         if(result.success) {
           await Swal.fire('Pedido Eliminado', result.message, 'success');
@@ -114,7 +114,7 @@ window.deleteOrder = deleteOrder; // to be able to use it globally in the html
 
 
   async function loadTable() {
-    const response = await fetch("http://localhost:3000/api/admin-panel", {
+    const response = await fetch("/api/admin-panel", {
         headers: { 'Accept': 'application/json' } 
     });
     const result = await response.json();
@@ -183,7 +183,7 @@ window.deleteOrder = deleteOrder; // to be able to use it globally in the html
   }
 
   async function getPendingCustomRequests() {
-    const response = await fetch("http://localhost:3000/api/admin-panel");
+    const response = await fetch("/api/admin-panel");
     const result = await response.json();
     const customList = document.getElementById("customRequestsList");
 
@@ -269,7 +269,7 @@ window.deleteOrder = deleteOrder; // to be able to use it globally in the html
 
 
   async function loadStockTable() {
-    const response = await fetch('http://localhost:3000/api/admin-panel', {
+    const response = await fetch('/api/admin-panel', {
       headers: { 'Accept': 'application/json' }
     });
     const result = await response.json();
@@ -382,7 +382,7 @@ async function deleteCustomRequest(id) {
   if (!confirmation.isConfirmed) return;
 
     try {
-        const response = await fetch(`http://localhost:3000/api/admin-panel/delete-custom-request/${id}`, {
+        const response = await fetch(`/api/admin-panel/delete-custom-request/${id}`, {
             method: 'PUT'
         }); //
 
@@ -448,7 +448,7 @@ loadPage();
 
     try {
       // Crearemos este nuevo archivo en el backend
-      const response = await fetch("http://localhost:3000/api/admin-panel/update-order-status", {
+      const response = await fetch("/api/admin-panel/update-order-status", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderUpdates),
@@ -491,7 +491,7 @@ loadPage();
 
     // 2. Enviar los datos al script de backend
     try {
-      const response = await fetch("http://localhost:3000/api/admin-panel/update-stock", {
+      const response = await fetch("/api/admin-panel/update-stock", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -548,7 +548,7 @@ loadPage();
 
     // we sent the data to the backend, we need to create a new route and controller for this, we will use the same model that we created for the products
     try {
-      const response = await fetch("http://localhost:3000/api/admin-panel/add-product", {
+      const response = await fetch("/api/admin-panel/add-product", {
         method: "POST",
         body:formData 
       });
@@ -634,7 +634,7 @@ loadPage();
   console.log("Aprobar solicitud con ID:", requestId);
   // we sent this to updat the status order to accepted
   try{
-    const response = await fetch(`http://localhost:3000/api/admin-panel/accept-custom-order/${requestId}`, {
+    const response = await fetch(`/api/admin-panel/accept-custom-order/${requestId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -739,7 +739,7 @@ document.addEventListener("click", async function(e){
     list.innerHTML = "<li>Cargando datos...</li>";
 
   try{
-    const response = await fetch(`http://localhost:3000/api/user-page/order-info/${orderId}`);
+    const response = await fetch(`/api/user-page/order-info/${orderId}`);
     const result = await response.json();
     if (result.success && result.data) {
             const order = result.data;
@@ -857,7 +857,7 @@ document.getElementById("closeOrderModal").addEventListener("click", function(){
 
       try {
           // Usamos query params para mandar la fecha y nombre al backend
-          const response = await fetch(`http://localhost:3000/api/admin-panel/filteredOrders/${searchEmail}`);
+          const response = await fetch(`/api/admin-panel/filteredOrders/${searchEmail}`);
           const result = await response.json();
 
           if (result.success && result.data.length > 0) {
@@ -883,7 +883,7 @@ document.getElementById("closeOrderModal").addEventListener("click", function(){
 
 document.querySelector(".logOut-button").addEventListener("click", async function(){
   // Clear the token from localStorage
-  window.location.href = "http://localhost:3000/api/delete-user-session";
+  window.location.href = "/api/delete-user-session";
 })
 
 })

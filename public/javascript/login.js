@@ -37,7 +37,7 @@ document.getElementById('register-form').addEventListener('submit', async functi
     // ==========================================
     try {
         // Usamos Fetch para enviar los datos a tu backend sin recargar la página
-        const response = await fetch('http://localhost:3000/api/createUser', {
+        const response = await fetch('/api/createUser', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -87,7 +87,7 @@ document.getElementById('login-form').addEventListener('submit', async function(
     e.preventDefault();
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
-    const  response = await fetch('http://localhost:3000/api/search-user', {
+    const  response = await fetch('/api/search-user', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
