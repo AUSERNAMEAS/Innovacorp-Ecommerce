@@ -25,7 +25,7 @@
 ### 🇺🇸 English
 See the application in full interactive action in the video demonstration below! It showcases the admin dashboard, the checkout flow, and live data persistence:
 
-* 🔗 **[➔ Ver Video Demostrativo aquí / Watch Demo Video Here](#)** *(Coloca aquí el enlace de tu video de Loom o YouTube / Paste your Loom or YouTube video link here)*
+* 🔗 **[➔ Ver Video Demostrativo aquí / Watch Demo Video Here](#)** *(https://youtu.be/TRvf1PYG5Yw)*
 
 ---
 
